@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="p-grid">
+    <div class="p-col-12">
+      <h1>Pesquisa de Vendas</h1>
+    </div>
+
+    <div class="p-col-12 p-fluid" style="margin: 15px;">
+      <label>Cliente</label>
+      <input type="text" placeholder="Pesquise pelo cliente" pInputText />
+    </div>
+
+    <div class="p-col-12" style="margin: 15px;">
+      <label style="display: block;">Data</label>
+      <input type="text" pInputText style="width: 95px;" />
+
+      <label class="label" style="margin: 0 5px;">Até</label>
+      <input type="text" pInputText style="width: 95px;" />
+    </div>
+
+    <div class="p-col-12" style="margin: 15px 0;">
+      <button pButton type="submit" label="Pesquisar" style="margin: 0 15px;"></button>
+    </div>
+  </div>
+
+  <div class="p-grid">
+    <div class="p-col-12">
+      <p-table [value]="business" [paginator]="true" [rows]="5"
+        responsiveLayout="scroll">
+        <ng-template pTemplate="header">
+          <tr>
+              <th>Nome</th>
+              <th class="col-cliente-header">Cliente</th>
+              <th class="col-nuit-header">NUIT</th>
+              <th class="col-data-header">Data</th>
+              <th class="col-valor-header">Valor</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-busines>
+          <tr>
+              <td>{{busines.entidade}}</td>
+              <td class="col-quantidade-content">{{busines.entidade}}</td>
+              <td class="col-valor-content">{{busines.dataBusiness}}</td>
+              <td class="col-valor-content">{{valorTotal}}</td>
+              <td class="col-accoes">
+                <button pButton icon="pi pi-pencil" pTooltip="Alterar" tooltipPosition="top"></button>
+                <button pButton icon="pi pi-trash" pTooltip="Eliminar" tooltipPosition="top"></button>
+              </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+
+  <a pButton label="Nova Venda" style="margin: 15px 0;"></a>
+
+</div>

@@ -8,11 +8,13 @@ import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
 import { NovaVendaComponent } from './nova-venda/nova-venda.component';
+import { PesquisaVendaComponent } from './pesquisa-venda/pesquisa-venda.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NovaVendaComponent
+    NovaVendaComponent,
+    PesquisaVendaComponent
   ],
   imports: [
     BrowserModule,
