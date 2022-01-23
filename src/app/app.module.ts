@@ -9,12 +9,16 @@ import { TableModule } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
 import { NovaVendaComponent } from './nova-venda/nova-venda.component';
 import { PesquisaVendaComponent } from './pesquisa-venda/pesquisa-venda.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { PesquisaProdutosComponent } from './pesquisa-produtos/pesquisa-produtos.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NovaVendaComponent,
-    PesquisaVendaComponent
+    PesquisaVendaComponent,
+    NavbarComponent,
+    PesquisaProdutosComponent
   ],
   imports: [
     BrowserModule,
