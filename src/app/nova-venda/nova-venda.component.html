@@ -1,24 +1,33 @@
 <div class="container">
-  <div class="p-grid">
-    <div class="p-col-12">
+  <div class="grid">
+    <div class="col-12">
       <h1>Nova Venda</h1>
     </div>
 
-    <div class="p-col-12 p-fluid" style="margin: 15px;">
-      <label>Produto</label>
-      <input type="text" placeholder="Pesquise pelo produto" pInputText />
+    <div class="col-12 p-fluid">
+      <div class="col-12 md:col-6">
+        <label>Cliente</label>
+        <p-dropdown [options]="clientes" optionLabel="nome" [filter]="true" placeholder="Pesquise pelo cliente"></p-dropdown>
+        <!--<input type="text" placeholder="Pesquise pelo cliente" pInputText />-->
+      </div>
     </div>
 
-    <div class="p-col-12" style="margin: 15px;">
+    <div class="col-12 md:col-6 p-fluid">
+      <label>Produto</label>
+      <p-dropdown [options]="produtos" optionLabel="nome" [filter]="true" placeholder="Pesquise pelo produto"></p-dropdown>
+      <!--<input type="text" placeholder="Pesquise pelo produto" pInputText />-->
+    </div>
+
+    <div class="col-12 md:col-6">
       <label style="display: block;">Quantidade</label>
-      <input type="text" pInputText style="width: 95px;" />
+      <input type="text" pInputText style="width: 95px;"/>
       <button pButton type="submit" label="Adicionar" style="margin: 0 15px;"></button>
     </div>
   </div>
 
-  <div class="p-grid">
-    <div class="p-col-12">
-      <p-table [value]="lancamentos" [paginator]="true" [rows]="5"
+  <div class="grid">
+    <div class="col-12">
+      <p-table [value]="lancamentos" [paginator]="true" [rows]="3"
         responsiveLayout="scroll">
         <ng-template pTemplate="header">
           <tr>
@@ -33,8 +42,8 @@
           <tr>
               <td>{{lancamento.produto}}</td>
               <td class="col-quantidade-content">{{lancamento.quantidade}}</td>
-              <td class="col-valor-content">{{lancamento.preco}}</td>
-              <td class="col-valor-content">{{lancamento.valorTotal}}</td>
+              <td class="col-valor-content">{{lancamento.preco | currency: 'MZN':'' }}</td>
+              <td class="col-valor-content">{{lancamento.valorTotal | currency: 'MZN':'' }}</td>
               <td class="col-accoes">
                 <button pButton icon="pi pi-pencil" pTooltip="Alterar" tooltipPosition="top"></button>
                 <button pButton icon="pi pi-trash" pTooltip="Eliminar" tooltipPosition="top"></button>
@@ -45,25 +54,26 @@
     </div>
   </div>
 
-  <div class="p-grid">
-      <div class="p-col-12" style="margin: 30px; text-align: right;">
+  <div class="grid">
+      <div class="col-12" style="margin: 10px; text-align: right;">
         <label style="font-weight: normal;">Valor Total: </label>
-        <label>{{ valorT }} MT</label>
+        <label>{{ valorT | currency: 'MZN':'' }} MTn</label>
       </div>
 
-      <div class="p-col-12" style="margin: 30px; text-align: right;">
+      <div class="col-12" style="margin: 10px; text-align: right;">
         <label style="font-weight: normal;">Valor Pago: </label>
-        <input type="text" pInputText style="width: 95px;" />
-        <label> MT</label>
+        <p-inputNumber mode="currency" currency="MZN" locale="pt-MZ" placeholder="0,00" [min]="0"></p-inputNumber>
       </div>
 
-      <div class="p-col-12" style="margin: 30px; text-align: right;">
+      <div class="col-12" style="margin: 10px; text-align: right;">
         <label style="font-weight: normal;">Trocos: </label>
-        <label>{{ valorT }} MT</label>
+        <label>{{ valorT | currency: 'MZN':'' }} MTn</label>
       </div>
 
-      <div class="p-col-12">
-        <button pButton type="submit" label="Finalizar Venda" style="margin: 0 15px;"></button>
+      <div class="col-12">
+        <button pButton type="submit" label="Finalizar Venda" style="margin: 0 25px;"></button>
+
+        <a href="javascript:;">Voltar para a pesquisa</a>
       </div>
   </div>
 </div>

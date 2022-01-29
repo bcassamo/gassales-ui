@@ -5,6 +5,14 @@ body {
   color: #404C51;
 }
 
+a {
+  text-decoration: none;
+}
+
+a:hover, a:focus {
+  text-decoration: underline;
+}
+
 label {
   font-weight: bold;
 }
@@ -17,7 +25,7 @@ label {
 }
 
 .col-valor-header {
-  width: 120px;
+  width: 150px;
   text-align: center !important;
 }
 

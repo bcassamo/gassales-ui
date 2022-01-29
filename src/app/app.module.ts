@@ -1,16 +1,22 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { InputTextModule } from 'primeng/inputtext';
-import { ButtonModule } from 'primeng/button';
-import { TableModule } from 'primeng/table';
-import { TooltipModule } from 'primeng/tooltip';
+import { AppRoutingModule } from './app-routing.module';
+
+import { NavbarComponent } from './navbar/navbar.component';
 import { NovaVendaComponent } from './nova-venda/nova-venda.component';
 import { PesquisaVendaComponent } from './pesquisa-venda/pesquisa-venda.component';
-import { NavbarComponent } from './navbar/navbar.component';
 import { PesquisaProdutosComponent } from './pesquisa-produtos/pesquisa-produtos.component';
+
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
+import { TooltipModule } from 'primeng/tooltip';
+import { CalendarModule } from 'primeng/calendar';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 @NgModule({
   declarations: [
@@ -22,12 +28,16 @@ import { PesquisaProdutosComponent } from './pesquisa-produtos/pesquisa-produtos
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
 
-    InputTextModule,
-    ButtonModule,
     TableModule,
-    TooltipModule
+    ButtonModule,
+    TooltipModule,
+    CalendarModule,
+    DropdownModule,
+    InputTextModule,
+    InputNumberModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,30 +1,29 @@
 <div class="container">
-  <div class="p-grid">
-    <div class="p-col-12">
+  <div class="grid">
+    <div class="col-12">
       <h1>Pesquisa de Vendas</h1>
     </div>
 
-    <div class="p-col-12 p-fluid" style="margin: 15px;">
+    <div class="col-12 p-fluid">
       <label>Cliente</label>
       <input type="text" placeholder="Pesquise pelo cliente" pInputText />
     </div>
 
-    <div class="p-col-12" style="margin: 15px;">
+    <div class="col-6 md:col-12">
       <label style="display: block;">Data</label>
-      <input type="text" pInputText style="width: 95px;" />
-
+      <p-calendar dateFormat="dd-mm-yy" [showIcon]="true"></p-calendar>
       <label class="label" style="margin: 0 5px;">Até</label>
-      <input type="text" pInputText style="width: 95px;" />
+      <p-calendar dateFormat="dd-mm-yy" [showIcon]="true"></p-calendar>
     </div>
 
-    <div class="p-col-12" style="margin: 15px 0;">
-      <button pButton type="submit" label="Pesquisar" style="margin: 0 15px;"></button>
+    <div class="col-12" style="margin: 15px 0;">
+      <button pButton type="submit" label="Pesquisar"></button>
     </div>
   </div>
 
-  <div class="p-grid">
-    <div class="p-col-12">
-      <p-table [value]="business" [paginator]="true" [rows]="5"
+  <div class="grid">
+    <div class="col-12">
+      <p-table [value]="business" [paginator]="true" [rows]="3"
         responsiveLayout="scroll">
         <ng-template pTemplate="header">
           <tr>

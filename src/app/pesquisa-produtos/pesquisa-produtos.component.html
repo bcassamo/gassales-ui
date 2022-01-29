@@ -4,19 +4,19 @@
       <h1>Pesquisa de Produtos</h1>
     </div>
 
-    <div class="p-col-12 p-fluid" style="margin: 15px;">
+    <div class="p-col-12 p-fluid">
       <label>Nome</label>
       <input type="text" placeholder="Pesquise pelo produto" pInputText />
     </div>
 
     <div class="p-col-12" style="margin: 15px 0;">
-      <button pButton type="submit" label="Pesquisar" style="margin: 0 15px;"></button>
+      <button pButton type="submit" label="Pesquisar"></button>
     </div>
   </div>
 
   <div class="p-grid">
     <div class="p-col-12">
-      <p-table [value]="produtos" [paginator]="true" [rows]="5"
+      <p-table [value]="produtos" [paginator]="true" [rows]="3"
         responsiveLayout="scroll">
         <ng-template pTemplate="header">
           <tr>
@@ -34,7 +34,7 @@
               <td>{{produto.descricao}}</td>
               <td class="col-quantidade-content">{{produto.tamanho}}</td>
               <td class="col-quantidade-content">{{produto.quantidade}}</td>
-              <td class="col-valor-content">{{produto.preco}}</td>
+              <td class="col-valor-content">{{produto.preco | currency:'MZN':'MT ':'1.2-2'}}</td>
               <td class="col-accoes">
                 <button pButton icon="pi pi-pencil" pTooltip="Alterar" tooltipPosition="top"></button>
                 <button pButton icon="pi pi-trash" pTooltip="Eliminar" tooltipPosition="top"></button>
