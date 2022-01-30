@@ -19,6 +19,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { NovaEntidadeComponent } from './nova-entidade/nova-entidade.component';
+import { PesquisaClienteComponent } from './pesquisa-cliente/pesquisa-cliente.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { NovaEntidadeComponent } from './nova-entidade/nova-entidade.component';
     PesquisaVendaComponent,
     NavbarComponent,
     PesquisaProdutosComponent,
-    NovaEntidadeComponent
+    NovaEntidadeComponent,
+    PesquisaClienteComponent
   ],
   imports: [
     BrowserModule,

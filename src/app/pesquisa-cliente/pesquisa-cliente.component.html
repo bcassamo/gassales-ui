@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="grid">
+    <div class="col-12">
+      <h1>Clientes</h1>
+    </div>
+
+    <div class="col-12 md:col-9 p-fluid">
+      <label style="display: block;">Nome</label>
+      <input type="text" pInputText />
+    </div>
+
+    <div class="col-12 md:col-3 p-fluid">
+      <label style="display: block;">NUIT</label>
+      <input type="text" pInputText />
+    </div>
+
+    <div class="col-12" style="margin: 15px 0;">
+      <button pButton type="submit" label="Pesquisar"></button>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="col-12">
+      <p-table [value]="clientes" [paginator]="true" [rows]="3"
+        responsiveLayout="scroll">
+        <ng-template pTemplate="header">
+          <tr>
+              <th>Nome</th>
+              <th>NUIT</th>
+              <th>Bairro</th>
+              <th>Rua</th>
+              <th>Número</th>
+              <th class="col-accoes-header"></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-cliente>
+          <tr>
+              <td>{{cliente.nome}}</td>
+              <td>{{cliente.nuit}}</td>
+              <td>{{cliente.bairro}}</td>
+              <td>{{cliente.rua}}</td>
+              <td>{{cliente.numero}}</td>
+              <td class="col-accoes">
+                <button pButton icon="pi pi-pencil" pTooltip="Alterar" tooltipPosition="top"></button>
+                <button pButton icon="pi pi-trash" pTooltip="Eliminar" tooltipPosition="top"></button>
+              </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+
+  <a pButton label="Novo Cliente" style="margin: 15px 0;"></a>
+</div>
+
