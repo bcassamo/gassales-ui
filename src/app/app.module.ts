@@ -17,6 +17,8 @@ import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { NovaEntidadeComponent } from './nova-entidade/nova-entidade.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { InputNumberModule } from 'primeng/inputnumber';
     NovaVendaComponent,
     PesquisaVendaComponent,
     NavbarComponent,
-    PesquisaProdutosComponent
+    PesquisaProdutosComponent,
+    NovaEntidadeComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +40,8 @@ import { InputNumberModule } from 'primeng/inputnumber';
     CalendarModule,
     DropdownModule,
     InputTextModule,
-    InputNumberModule
+    InputNumberModule,
+    SelectButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
