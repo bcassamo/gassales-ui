@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="grid">
+    <div class="col-12">
+      <h1>Nova Entidade</h1>
+    </div>
+
+    <div class="col-12">
+      <p-selectButton [options]="tipos" #tipo></p-selectButton>
+    </div>
+
+    <div class="col-9 p-fluid">
+      <label style="display: block;">Nome do {{ tipo.value === 'CLIENTE' ? 'Cliente' : 'Fornecedor'}}</label>
+      <input type="text" pInputText />
+    </div>
+
+    <div class="col-3 p-fluid">
+      <label style="display: block;">NUIT</label>
+      <input type="text" pInputText />
+    </div>
+
+    <div class="col-12 p-fluid">
+      <label style="display: block;">Bairro</label>
+      <input type="text" pInputText />
+    </div>
+
+    <div class="col-9 p-fluid">
+      <label style="display: block;">Rua</label>
+      <input type="text" pInputText />
+    </div>
+
+    <div class="col-3 p-fluid">
+      <label style="display: block;">Número</label>
+      <input type="text" pInputText />
+    </div>
+
+    <div class="col-12">
+      <button pButton type="submit" label="Salvar"></button>
+    </div>
+  </div>
+</div>
