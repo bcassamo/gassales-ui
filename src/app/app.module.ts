@@ -15,6 +15,7 @@ import { ButtonModule } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
 import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
+import { InputMaskModule } from 'primeng/inputmask';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { SelectButtonModule } from 'primeng/selectbutton';
@@ -43,7 +44,8 @@ import { PesquisaClienteComponent } from './pesquisa-cliente/pesquisa-cliente.co
     DropdownModule,
     InputTextModule,
     InputNumberModule,
-    SelectButtonModule
+    SelectButtonModule,
+    InputMaskModule
   ],
   providers: [],
   bootstrap: [AppComponent]
