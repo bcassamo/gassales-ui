@@ -5,9 +5,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import { MessageModule } from 'primeng/message';
-import { MessagesModule } from 'primeng/messages';
-
 import { BusinessModule } from './business/business.module';
 import { ProdutosModule } from './produtos/produtos.module';
 import { EntidadesModule } from './entidades/entidades.module';
@@ -28,10 +25,7 @@ import { MessageComponent } from './message/message.component';
 
     BusinessModule,
     EntidadesModule,
-    ProdutosModule,
-
-    MessageModule,
-    MessagesModule
+    ProdutosModule
   ],
   providers: [],
   bootstrap: [AppComponent]
