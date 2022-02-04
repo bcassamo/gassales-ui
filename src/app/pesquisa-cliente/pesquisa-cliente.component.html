@@ -6,12 +6,12 @@
 
     <div class="col-12 md:col-9 p-fluid">
       <label style="display: block;">Nome</label>
-      <input type="text" pInputText />
+      <input type="text" pInputText name="nome" ngModel/>
     </div>
 
     <div class="col-12 md:col-3 p-fluid">
       <label style="display: block;">NUIT</label>
-      <p-inputNumber [min]="0"></p-inputNumber>
+      <p-inputNumber [min]="0" name="nuit" ngModel></p-inputNumber>
     </div>
 
     <div class="col-12" style="margin: 15px 0;">
