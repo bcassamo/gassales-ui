@@ -4,18 +4,18 @@ import { CommonModule } from '@angular/common';
 
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
-import { CalendarModule } from 'primeng/calendar';
-import { DropdownModule } from 'primeng/dropdown';
+import { TooltipModule } from 'primeng/tooltip';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { SelectButtonModule } from 'primeng/selectbutton';
 
-import { NovaVendaComponent } from './nova-venda/nova-venda.component';
-import { PesquisaVendaComponent } from './pesquisa-venda/pesquisa-venda.component';
+import { NovaEntidadeComponent } from './nova-entidade/nova-entidade.component';
+import { PesquisaClienteComponent } from './pesquisa-cliente/pesquisa-cliente.component';
 
 @NgModule({
   declarations: [
-    NovaVendaComponent,
-    PesquisaVendaComponent
+    NovaEntidadeComponent,
+    PesquisaClienteComponent
   ],
   imports: [
     CommonModule,
@@ -23,14 +23,14 @@ import { PesquisaVendaComponent } from './pesquisa-venda/pesquisa-venda.componen
 
     TableModule,
     ButtonModule,
-    CalendarModule,
-    DropdownModule,
+    TooltipModule,
     InputTextModule,
-    InputNumberModule
+    InputNumberModule,
+    SelectButtonModule
   ],
   exports: [
-    NovaVendaComponent,
-    PesquisaVendaComponent
+    NovaEntidadeComponent,
+    PesquisaClienteComponent
   ]
 })
-export class VendasModule { }
+export class EntidadesModule { }
