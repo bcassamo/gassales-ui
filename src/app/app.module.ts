@@ -18,12 +18,13 @@ import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { SelectButtonModule } from 'primeng/selectbutton';
 
-import { VendasModule } from './vendas/vendas.module';
+import { BusinessModule } from './business/business.module';
+import { EntidadesModule } from './entidades/entidades.module';
 
 import { NavbarComponent } from './navbar/navbar.component';
 import { MessageComponent } from './message/message.component';
-import { NovaEntidadeComponent } from './nova-entidade/nova-entidade.component';
-import { PesquisaClienteComponent } from './pesquisa-cliente/pesquisa-cliente.component';
+
+
 import { PesquisaProdutosComponent } from './pesquisa-produtos/pesquisa-produtos.component';
 
 @NgModule({
@@ -31,8 +32,6 @@ import { PesquisaProdutosComponent } from './pesquisa-produtos/pesquisa-produtos
     AppComponent,
     NavbarComponent,
     PesquisaProdutosComponent,
-    NovaEntidadeComponent,
-    PesquisaClienteComponent,
     MessageComponent
   ],
   imports: [
@@ -41,7 +40,8 @@ import { PesquisaProdutosComponent } from './pesquisa-produtos/pesquisa-produtos
     AppRoutingModule,
     FormsModule,
 
-    VendasModule,
+    BusinessModule,
+    EntidadesModule,
 
     TableModule,
     ButtonModule,
