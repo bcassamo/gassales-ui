@@ -22,8 +22,8 @@
       </div>
 
       <div class="col-12 md:col-6">
-        <!--<app-message [control]="quantidade" error="required"
-          text="Preencha a quantidade para o produto seleccionado"></app-message>-->
+        <app-message [control]="quantidade" error="required"
+          text="Preencha a quantidade para o produto seleccionado"></app-message>
 
         <label style="display: block;">Quantidade</label>
         <p-inputNumber [min]="0" [size]="6" name="quantidade" ngModel #quantidade="ngModel" [required]="true"></p-inputNumber>
@@ -71,8 +71,8 @@
           <label style="font-weight: normal;">Valor Pago: </label>
           <p-inputNumber mode="currency" currency="MZN" locale="pt-MZ" [min]="0" name="valor" ngModel #valor="ngModel" [required]="true"></p-inputNumber>
 
-          <!--<app-message [control]="valor" error="required"
-            text="Preencha o valor Pago"></app-message>-->
+          <app-message [control]="valor" error="required"
+            text="Preencha o valor Pago"></app-message>
         </div>
 
         <div class="col-12" style="margin: 10px; text-align: right;">
