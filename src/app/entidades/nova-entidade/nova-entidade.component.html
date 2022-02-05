@@ -13,11 +13,11 @@
         <label style="display: block;">Nome do {{ tipo.value === 'CLIENTE' ? 'Cliente' : 'Fornecedor'}}</label>
         <input type="text" pInputText name="nome" ngModel #nome="ngModel" required minlength="3"/>
 
-        <!--<app-message [control]="nome" error="required"
+        <app-message [control]="nome" error="required"
           text="Preencha o nome"></app-message>
 
         <app-message [control]="nome" error="minlength"
-          text="Deve ter no mínimo {{ nome.errors?.minlength?.requiredLength }} caracteres"></app-message>-->
+          text="Deve ter no mínimo {{ nome.errors?.minlength?.requiredLength }} caracteres"></app-message>
       </div>
 
       <div class="col-12 md:col-3 p-fluid">
