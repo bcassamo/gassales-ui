@@ -24,7 +24,7 @@
   <div class="grid">
     <div class="col-12">
       <p-table [value]="business" [paginator]="true" [rows]="3"
-        responsiveLayout="scroll">
+        responsiveLayout="scroll" emptyMessage="Nenhuma venda">
         <ng-template pTemplate="header">
           <tr>
               <th class="col-cliente-header">Nome</th>

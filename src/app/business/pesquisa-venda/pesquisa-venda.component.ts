@@ -7,9 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PesquisaVendaComponent {
 
-  business = [
-
-  ];
+  business = [];
 
   valorTotal = 50;
 
