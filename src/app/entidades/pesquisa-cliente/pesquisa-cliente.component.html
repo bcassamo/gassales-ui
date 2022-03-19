@@ -1,23 +1,25 @@
 <div class="container">
-  <div class="grid">
-    <div class="col-12">
-      <h1>Clientes</h1>
-    </div>
+  <form autocomplete="off" (ngSubmit)="pesquisar()">
+    <div class="grid">
+      <div class="col-12">
+        <h1>Clientes</h1>
+      </div>
 
-    <div class="col-12 md:col-9 p-fluid">
-      <label style="display: block;">Nome</label>
-      <input type="text" pInputText name="nome" ngModel/>
-    </div>
+      <div class="col-12 md:col-9 p-fluid">
+        <label style="display: block;">Nome</label>
+        <input type="text" pInputText name="nome" ngModel [(ngModel)]="nome"/>
+      </div>
 
-    <div class="col-12 md:col-3 p-fluid">
-      <label style="display: block;">NUIT</label>
-      <p-inputNumber [min]="0" name="nuit" ngModel></p-inputNumber>
-    </div>
+      <div class="col-12 md:col-3 p-fluid">
+        <label style="display: block;">NUIT</label>
+        <p-inputNumber [min]="0" name="nuit" ngModel [(ngModel)]="nuit"></p-inputNumber>
+      </div>
 
-    <div class="col-12" style="margin: 15px 0;">
-      <button pButton type="submit" label="Pesquisar"></button>
+      <div class="col-12" style="margin: 15px 0;">
+        <button pButton type="submit" label="Pesquisar"></button>
+      </div>
     </div>
-  </div>
+  </form>
 
   <div class="grid">
     <div class="col-12">
@@ -37,9 +39,9 @@
           <tr>
               <td>{{cliente.nome}}</td>
               <td>{{cliente.nuit}}</td>
-              <td>{{cliente.bairro}}</td>
-              <td>{{cliente.rua}}</td>
-              <td>{{cliente.numero}}</td>
+              <td>{{cliente.endereco?.bairro}}</td>
+              <td>{{cliente.endereco?.rua}}</td>
+              <td>{{cliente.endereco?.numero}}</td>
               <td class="col-accoes">
                 <button pButton icon="pi pi-pencil" pTooltip="Alterar" tooltipPosition="top"></button>
                 <button pButton icon="pi pi-trash" pTooltip="Eliminar" tooltipPosition="top"></button>

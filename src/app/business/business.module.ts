@@ -1,7 +1,7 @@
-import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
@@ -11,6 +11,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
 
+import { SharedModule } from './../shared/shared.module';
 import { NovaVendaComponent } from './nova-venda/nova-venda.component';
 import { PesquisaVendaComponent } from './pesquisa-venda/pesquisa-venda.component';
 
@@ -22,6 +23,7 @@ import { PesquisaVendaComponent } from './pesquisa-venda/pesquisa-venda.componen
   imports: [
     CommonModule,
     FormsModule,
+    HttpClientModule,
 
     TableModule,
     ButtonModule,
