@@ -1,3 +1,4 @@
+import { EntidadeService, EntidadeFiltro } from './../entidade.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,14 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PesquisaClienteComponent implements OnInit {
 
-  constructor() { }
+  clientes = [];
+  nome?: string;
+  nuit?: string;
+
+  constructor(private entidadeService: EntidadeService) { }
 
   ngOnInit(): void {
+    this.pesquisar()
   }
 
-  clientes = [
-    { nome: "Almeida Costa", nuit: "1109332", bairro: "Bairro de Muhalaze", rua: "Rua do Limpopo", numero: "132A" },
-    { nome: "Betuel Fernando", nuit: "1015339", bairro: null, rua: null, numero: null }
-  ];
+  pesquisar() {
+    const filtro: EntidadeFiltro = {
+      nome: this.nome,
+      nuit: this.nuit
+    }
 
+    this.entidadeService.pesquisar(filtro)
+      .then(customers => this.clientes = customers);
+  }
 }

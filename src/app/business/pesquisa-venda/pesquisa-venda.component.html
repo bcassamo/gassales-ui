@@ -1,25 +1,32 @@
 <div class="container">
-  <div class="grid">
-    <div class="col-12">
-      <h1>Pesquisa de Vendas</h1>
-    </div>
 
-    <div class="col-12 p-fluid">
-      <label>Cliente</label>
-      <input type="text" placeholder="Pesquise pelo cliente" pInputText name="cliente" ngModel/>
-    </div>
+  <form autocomplete="off" (ngSubmit)="pesquisar()">
+    <div class="grid">
+      <div class="col-12">
+        <h1>Pesquisa de Vendas</h1>
+      </div>
 
-    <div class="col-6 md:col-12">
-      <label style="display: block;">Data</label>
-      <p-calendar dateFormat="dd-mm-yy" [showIcon]="true"></p-calendar>
-      <label class="label" style="margin: 0 5px;">Até</label>
-      <p-calendar dateFormat="dd-mm-yy" [showIcon]="true"></p-calendar>
-    </div>
+      <div class="col-12 md:col-6 p-fluid">
+        <label>Cliente</label>
+        <p-dropdown [options]="clientes" optionLabel="nome" [filter]="true" placeholder="Pesquise pelo cliente"
+              emptyFilterMessage="Nenhum cliente encontrado" name="cliente" ngModel #cliente></p-dropdown>
+        <!-- <input type="text" placeholder="Pesquise pelo cliente" pInputText name="cliente" ngModel/> -->
+      </div>
 
-    <div class="col-12" style="margin: 15px 0;">
-      <button pButton type="submit" label="Pesquisar"></button>
+      <div class="col-6 md:col-12">
+        <label style="display: block;">Data</label>
+        <p-calendar dateFormat="dd-mm-yy" [showIcon]="true"
+          name="vendaInicio" [(ngModel)]="dataVendaInicio"></p-calendar>
+        <label class="label" style="margin: 0 5px;">Até</label>
+        <p-calendar dateFormat="dd-mm-yy" [showIcon]="true"
+          name="vendaFim" [(ngModel)]="dataVendaFim"></p-calendar>
+      </div>
+
+      <div class="col-12" style="margin: 15px 0;">
+        <button pButton type="submit" label="Pesquisar"></button>
+      </div>
     </div>
-  </div>
+  </form>
 
   <div class="grid">
     <div class="col-12">
@@ -27,19 +34,19 @@
         responsiveLayout="scroll" emptyMessage="Nenhuma venda">
         <ng-template pTemplate="header">
           <tr>
-              <th class="col-cliente-header">Nome</th>
-              <th class="col-nuit-header">NUIT</th>
-              <th class="col-data-header">Data</th>
-              <th class="col-valor-header">Valor</th>
+              <th>Nome</th>
+              <th>NUIT</th>
+              <th>Data</th>
+              <th>Valor</th>
               <th class="col-accoes-header"></th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-busines>
           <tr>
-              <td>{{busines.entidade}}</td>
-              <td class="col-quantidade-content">{{busines.entidade}}</td>
-              <td class="col-valor-content">{{busines.dataBusiness}}</td>
-              <td class="col-valor-content">{{valorTotal}}</td>
+              <td>{{busines.entidade.nome}}</td>
+              <td>{{busines.entidade.nuit}}</td>
+              <td>{{busines.dataBusiness | date:'dd-MM-y'}}</td>
+              <td>{{busines.lancamento.valorTotal}}</td>
               <td class="col-accoes">
                 <button pButton icon="pi pi-pencil" pTooltip="Alterar" tooltipPosition="top"></button>
                 <button pButton icon="pi pi-trash" pTooltip="Eliminar" tooltipPosition="top"></button>
