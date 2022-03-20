@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -14,6 +15,7 @@ import { PesquisaProdutosComponent } from './pesquisa-produtos/pesquisa-produtos
   ],
   imports: [
     CommonModule,
+    FormsModule,
 
     TableModule,
     ButtonModule,

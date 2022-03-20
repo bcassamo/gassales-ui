@@ -1,21 +1,28 @@
 <div class="container">
-  <div class="p-grid">
-    <div class="p-col-12">
-      <h1>Pesquisa de Produtos</h1>
-    </div>
+  <form autocomplete="off" (ngSubmit)="pesquisar()">
+    <div class="grid">
+      <div class="col-12">
+        <h1>Pesquisa de Produtos</h1>
+      </div>
 
-    <div class="p-col-12 p-fluid">
-      <label>Nome</label>
-      <input type="text" placeholder="Pesquise pelo produto" pInputText name="nome" ngModel/>
-    </div>
+      <div class="col-12 md:col-9 p-fluid">
+        <label style="display: block;">Nome</label>
+        <input type="text" pInputText name="nome" ngModel [(ngModel)]="nome"/>
+      </div>
 
-    <div class="p-col-12" style="margin: 15px 0;">
-      <button pButton type="submit" label="Pesquisar"></button>
-    </div>
-  </div>
+      <div class="col-12 md:col-3 p-fluid">
+        <label style="display: block;">Referência</label>
+        <input type="text" pInputText name="referencia" ngModel [(ngModel)]="referencia"/>
+      </div>
 
-  <div class="p-grid">
-    <div class="p-col-12">
+      <div class="col-12" style="margin: 15px 0;">
+        <button pButton type="submit" label="Pesquisar"></button>
+      </div>
+    </div>
+  </form>
+
+  <div class="grid">
+    <div class="col-12">
       <p-table [value]="produtos" [paginator]="true" [rows]="3"
         responsiveLayout="scroll">
         <ng-template pTemplate="header">
@@ -33,8 +40,8 @@
               <td>{{produto.nome}}</td>
               <td>{{produto.descricao}}</td>
               <td class="col-quantidade-content">{{produto.tamanho}}</td>
-              <td class="col-quantidade-content">{{produto.quantidade}}</td>
-              <td class="col-valor-content">{{produto.preco | currency:'MZN':'MT ':'1.2-2'}}</td>
+              <td class="col-quantidade-content">{{produto.stock?.quantidade}}</td>
+              <td class="col-valor-content">{{produto.preco | currency:'MZN':''}}</td>
               <td class="col-accoes">
                 <button pButton icon="pi pi-pencil" pTooltip="Alterar" tooltipPosition="top"></button>
                 <button pButton icon="pi pi-trash" pTooltip="Eliminar" tooltipPosition="top"></button>
