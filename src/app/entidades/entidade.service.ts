@@ -30,4 +30,13 @@ export class EntidadeService {
       .toPromise()
       .then((response: any) => response['content']);
   }
+
+  customerNames() : Promise<any> {
+    return this.http.get(`${this.entidadesUrl}/clientes`)
+      .toPromise()
+      .then((response: any) => {
+        response['content'];
+        return response['content'];
+      });
+  }
 }

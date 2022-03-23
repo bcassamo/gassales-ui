@@ -5,17 +5,19 @@
         <h1>Nova Venda</h1>
       </div>
 
-      <div class="col-12 p-fluid">
-        <div class="col-12 md:col-6">
-          <label>Cliente</label>
-          <p-dropdown [options]="clientes" optionLabel="nome" [filter]="true" placeholder="Pesquise pelo cliente"
-            emptyFilterMessage="Nenhum cliente encontrado" name="cliente" ngModel #cliente [required]="true"></p-dropdown>
-          <!--<input type="text" placeholder="Pesquise pelo cliente" pInputText />-->
-        </div>
+      <div class="col-12 md:col-9 p-fluid">
+        <label style="display: block;">Cliente</label>
+        <p-autoComplete [(ngModel)]="selectedCustomer" [suggestions]="filteredClients" (completeMethod)="search($event)"
+          name="cliente" #cliente="ngModel" [required]="true"></p-autoComplete>
+        <!--<input type="text" placeholder="Pesquise pelo cliente" pInputText
+          name="cliente" ngModel #cliente="ngModel" [required]="true"/>-->
+
+        <app-message [control]="cliente" error="required"
+          text="Preencha o nome do cliente"></app-message>
       </div>
 
       <div class="col-12 md:col-6 p-fluid">
-        <label>Produto</label>
+        <label style="display: block;">Produto</label>
         <p-dropdown [options]="produtos" optionLabel="nome" [filter]="true" placeholder="Pesquise pelo produto"
           emptyFilterMessage="Nenhum produto encontrado" name="produto" ngModel #produto [required]="true"></p-dropdown>
         <!--<input type="text" placeholder="Pesquise pelo produto" pInputText />-->
