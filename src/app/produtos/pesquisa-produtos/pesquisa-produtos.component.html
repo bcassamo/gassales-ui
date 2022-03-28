@@ -29,7 +29,7 @@
         <ng-template pTemplate="header">
           <tr>
               <th>Nome</th>
-              <th>Descrição</th>
+              <th>Referência</th>
               <th class="col-quantidade-header">Tamanho</th>
               <th class="col-quantidade-header">Quantidade</th>
               <th class="col-valor-header">Preço Un.</th>
@@ -39,7 +39,7 @@
         <ng-template pTemplate="body" let-produto>
           <tr>
               <td>{{produto.nome}}</td>
-              <td>{{produto.descricao}}</td>
+              <td>{{produto.referencia}}</td>
               <td class="col-quantidade-content">{{produto.tamanho}}</td>
               <td class="col-quantidade-content">{{produto.stock?.quantidade}}</td>
               <td class="col-valor-content">{{produto.preco | currency:'MZN':''}}</td>
