@@ -12,11 +12,13 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 
 import { NovaEntidadeComponent } from './nova-entidade/nova-entidade.component';
 import { PesquisaClienteComponent } from './pesquisa-cliente/pesquisa-cliente.component';
+import { PesquisaEntidadeComponent } from './pesquisa-entidade/pesquisa-entidade.component';
 
 @NgModule({
   declarations: [
     NovaEntidadeComponent,
-    PesquisaClienteComponent
+    PesquisaClienteComponent,
+    PesquisaEntidadeComponent
   ],
   imports: [
     CommonModule,
