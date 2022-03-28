@@ -1,9 +1,11 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-export interface EntidadeFiltro {
+export class EntidadeFiltro {
   nome?: string;
   nuit?: string;
+  pagina = 0;
+  itensPorPagina = 3;
 }
 
 @Injectable({
@@ -15,8 +17,11 @@ export class EntidadeService {
 
   constructor(private http: HttpClient) { }
 
-  pesquisar(filtro: EntidadeFiltro) : Promise<any> {
+  pesquisarClientes(filtro: EntidadeFiltro) : Promise<any> {
     let params = new HttpParams();
+
+    params = params.set('page', filtro.pagina);
+    params = params.set('size', filtro.itensPorPagina);
 
     if(filtro.nome) {
       params = params.set('nome', filtro.nome);
@@ -28,7 +33,14 @@ export class EntidadeService {
 
     return this.http.get(`${this.entidadesUrl}/clientes`, { params })
       .toPromise()
-      .then((response: any) => response['content']);
+      .then((response: any) => {
+        const customers = response['content'];
+        const resultado = {
+          customers,
+          total: response.totalElements
+        };
+        return resultado;
+      });
   }
 
   customerNames() : Promise<any> {
