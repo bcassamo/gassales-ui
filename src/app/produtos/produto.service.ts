@@ -1,9 +1,11 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-export interface ProdutoFiltro {
+export class ProdutoFiltro {
   nome?: string;
   referencia?: string;
+  pagina = 0;
+  itensPorPagina = 3;
 }
 
 @Injectable({
@@ -18,6 +20,9 @@ export class ProdutoService {
   pesquisar(filtro: ProdutoFiltro) : Promise<any> {
     let params = new HttpParams();
 
+    params = params.set('page', filtro.pagina);
+    params = params.set('size', filtro.itensPorPagina);
+
     if(filtro.nome) {
       params = params.set('nome', filtro.nome);
     }
@@ -28,7 +33,14 @@ export class ProdutoService {
 
     return this.http.get(`${this.produtosUrl}`, { params })
       .toPromise()
-      .then((response:any) => response['content']);
+      .then((response:any) => {
+        const produtos = response['content'];
+        const resultado = {
+          produtos,
+          total: response.totalElements
+        };
+        return resultado;
+      });
   }
 
 }
