@@ -8,18 +8,16 @@
 
       <div class="col-12 md:col-6 p-fluid">
         <label>Cliente</label>
-        <p-dropdown [options]="clientes" optionLabel="nome" [filter]="true" placeholder="Pesquise pelo cliente"
-              emptyFilterMessage="Nenhum cliente encontrado" name="cliente" ngModel #cliente></p-dropdown>
-        <!-- <input type="text" placeholder="Pesquise pelo cliente" pInputText name="cliente" ngModel/> -->
+        <input type="text" placeholder="Pesquise pelo cliente" pInputText name="cliente" ngModel/>
       </div>
 
       <div class="col-6 md:col-12">
         <label style="display: block;">Data</label>
         <p-calendar dateFormat="dd-mm-yy" [showIcon]="true"
-          name="vendaInicio" [(ngModel)]="dataVendaInicio"></p-calendar>
+          name="vendaInicio" [(ngModel)]="filtro.dataBusinessInicio"></p-calendar>
         <label class="label" style="margin: 0 5px;">Até</label>
         <p-calendar dateFormat="dd-mm-yy" [showIcon]="true"
-          name="vendaFim" [(ngModel)]="dataVendaFim"></p-calendar>
+          name="vendaFim" [(ngModel)]="filtro.dataBusinessFim"></p-calendar>
       </div>
 
       <div class="col-12" style="margin: 15px 0;">
@@ -30,8 +28,9 @@
 
   <div class="grid">
     <div class="col-12">
-      <p-table [value]="business" [paginator]="true" [rows]="3"
-        responsiveLayout="scroll" emptyMessage="Nenhuma venda">
+      <p-table [value]="business" responsiveLayout="scroll" emptyMessage="Nenhuma venda"
+        [paginator]="true" [rows]="filtro.itensPorPagina" [lazy]="true"
+        [totalRecords]="totalRegistos" (onLazyLoad)="aoMudarPagina($event)">
         <ng-template pTemplate="header">
           <tr>
               <th>Nome</th>
@@ -43,10 +42,10 @@
         </ng-template>
         <ng-template pTemplate="body" let-busines>
           <tr>
-              <td>{{busines.entidade.nome}}</td>
-              <td>{{busines.entidade.nuit}}</td>
+              <td>{{busines.lancamento?.entidade?.nome}}</td>
+              <td>{{busines.lancamento?.entidade?.nuit}}</td>
               <td>{{busines.dataBusiness | date:'dd-MM-y'}}</td>
-              <td>{{busines.lancamento.valorTotal}}</td>
+              <td>{{busines.lancamento?.valorTotal}}</td>
               <td class="col-accoes">
                 <button pButton icon="pi pi-pencil" pTooltip="Alterar" tooltipPosition="top"></button>
                 <button pButton icon="pi pi-trash" pTooltip="Eliminar" tooltipPosition="top"></button>
