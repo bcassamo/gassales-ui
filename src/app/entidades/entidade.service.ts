@@ -51,4 +51,30 @@ export class EntidadeService {
         return response['content'];
       });
   }
+
+  pesquisar(filtro: EntidadeFiltro) : Promise<any> {
+    let params = new HttpParams();
+
+    params = params.set('page', filtro.pagina);
+    params = params.set('size', filtro.itensPorPagina);
+
+    if(filtro.nome) {
+      params = params.set('nome', filtro.nome);
+    }
+
+    if(filtro.nuit) {
+      params = params.set('nuit', filtro.nuit);
+    }
+
+    return this.http.get(`${this.entidadesUrl}`, { params })
+      .toPromise()
+      .then((response: any) => {
+        const entities = response['content'];
+        const resultado = {
+          entities,
+          total: response.totalElements
+        };
+        return resultado;
+      });
+  }
 }
