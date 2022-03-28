@@ -35,7 +35,8 @@ import { PesquisaEntidadeComponent } from './pesquisa-entidade/pesquisa-entidade
   ],
   exports: [
     NovaEntidadeComponent,
-    PesquisaClienteComponent
+    PesquisaClienteComponent,
+    PesquisaEntidadeComponent
   ]
 })
 export class EntidadesModule { }
