@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { VendaService, VendaFiltro } from './../venda.service';
+import { LazyLoadEvent } from 'primeng/api';
+
+import { BusinessService, BusinessFiltro } from './../business.service';
 
 @Component({
   selector: 'app-pesquisa-venda',
@@ -9,25 +11,31 @@ import { VendaService, VendaFiltro } from './../venda.service';
 })
 export class PesquisaVendaComponent implements OnInit {
 
-  business = [];
-  clientes = [];
-  dataVendaInicio?: Date;
-  dataVendaFim?: Date;
+  totalRegistos: number = 0;
+  filtro = new BusinessFiltro();
+  business: any = [];
+  clientes: any = [];
+  //dataVendaInicio?: Date;
+  //dataVendaFim?: Date;
 
-  constructor(private vendaService: VendaService) {}
+  constructor(private businessService: BusinessService) {}
 
   ngOnInit(): void {
-      this.pesquisar();
+      //this.pesquisar();
   }
 
-  pesquisar() {
-    const filtro: VendaFiltro = {
-      dataVendaInicio: this.dataVendaInicio,
-      dataVendaFim: this.dataVendaFim
-    };
+  pesquisar(pagina: number = 0) {
+    this.filtro.pagina = pagina;
 
-    this.vendaService.pesquisar(filtro)
-      .then(vendas => this.business = vendas);
+    this.businessService.pesquisarVenda(this.filtro)
+      .then(resultado => {
+        this.totalRegistos = resultado.total;
+        this.business = resultado.business;
+      });
   }
 
+  aoMudarPagina(event: LazyLoadEvent) {
+    const pagina = event!.first! / event!.rows!;
+    this.pesquisar(pagina);
+  }
 }

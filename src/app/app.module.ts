@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { CoreModule } from './core/core.module';
-import { VendaService } from './business/venda.service';
 import { BusinessModule } from './business/business.module';
 import { ProdutosModule } from './produtos/produtos.module';
 import { EntidadesModule } from './entidades/entidades.module';
