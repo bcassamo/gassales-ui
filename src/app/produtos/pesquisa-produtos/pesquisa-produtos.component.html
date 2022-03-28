@@ -7,12 +7,12 @@
 
       <div class="col-12 md:col-9 p-fluid">
         <label style="display: block;">Nome</label>
-        <input type="text" pInputText name="nome" ngModel [(ngModel)]="nome"/>
+        <input type="text" pInputText name="nome" ngModel [(ngModel)]="filtro.nome"/>
       </div>
 
       <div class="col-12 md:col-3 p-fluid">
         <label style="display: block;">Referência</label>
-        <input type="text" pInputText name="referencia" ngModel [(ngModel)]="referencia"/>
+        <input type="text" pInputText name="referencia" ngModel [(ngModel)]="filtro.referencia"/>
       </div>
 
       <div class="col-12" style="margin: 15px 0;">
@@ -23,8 +23,9 @@
 
   <div class="grid">
     <div class="col-12">
-      <p-table [value]="produtos" [paginator]="true" [rows]="3"
-        responsiveLayout="scroll">
+      <p-table [value]="produtos" responsiveLayout="scroll"
+        [paginator]="true" [rows]="filtro.itensPorPagina" [lazy]="true"
+        [totalRecords]="totalRegistos" (onLazyLoad)="aoMudarPagina($event)">
         <ng-template pTemplate="header">
           <tr>
               <th>Nome</th>
