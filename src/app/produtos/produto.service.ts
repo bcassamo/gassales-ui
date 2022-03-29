@@ -43,4 +43,10 @@ export class ProdutoService {
       });
   }
 
+  listarTodos() : Promise<any> {
+    return this.http.get(this.produtosUrl)
+      .toPromise()
+      .then((response: any) => response['content']);
+  }
+
 }

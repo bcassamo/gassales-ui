@@ -5,7 +5,7 @@
         <h1>Nova Venda</h1>
       </div>
 
-      <div class="col-12 md:col-9 p-fluid">
+      <div class="col-12 md:col-6 p-fluid">
         <label style="display: block;">Cliente</label>
         <p-autoComplete [(ngModel)]="selectedCustomer" [suggestions]="filteredClients" (completeMethod)="search($event)"
           name="cliente" #cliente="ngModel" [required]="true"></p-autoComplete>
@@ -14,6 +14,9 @@
 
         <app-message [control]="cliente" error="required"
           text="Preencha o nome do cliente"></app-message>
+      </div>
+      <div class="col-12 md:col-6 p-fluid">
+        <!-- div vazia para permitir ajustar o autocomplete de clientes alinhado sozinho -->
       </div>
 
       <div class="col-12 md:col-6 p-fluid">
@@ -24,13 +27,13 @@
       </div>
 
       <div class="col-12 md:col-6">
-        <app-message [control]="quantidade" error="required"
-          text="Preencha a quantidade para o produto seleccionado"></app-message>
-
         <label style="display: block;">Quantidade</label>
         <p-inputNumber [min]="0" [size]="6" name="quantidade" ngModel #quantidade="ngModel" [required]="true"></p-inputNumber>
 
         <button pButton type="submit" label="Adicionar" style="margin: 0 15px;"></button>
+
+        <app-message [control]="quantidade" error="required"
+          text="Preencha a quantidade para o produto seleccionado"></app-message>
       </div>
     </div>
 
