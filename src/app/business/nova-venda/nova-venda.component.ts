@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ProdutoService } from './../../produtos/produto.service';
+import { Produto, ProdutoService } from './../../produtos/produto.service';
 import { EntidadeService } from './../../entidades/entidade.service';
 
 @Component({
@@ -27,6 +27,12 @@ export class NovaVendaComponent implements OnInit {
     //{ nome: 'Nitogénio', id: '3' }
   //];
   produtos: any[] = [];
+  esconderEstado: boolean = true;
+  estados = [
+    { descricao: 'VAZIA', id: '0'},
+    { descricao: 'CHEIA', id: '1'},
+    { descricao: 'NA', id: '3'}
+  ];
 
   constructor(private entidadeService: EntidadeService, private produtoService: ProdutoService) {}
 
@@ -36,6 +42,14 @@ export class NovaVendaComponent implements OnInit {
   }
 
   valorT = 15000;
+
+  escondeEstado(event: any) {
+    if(event.value.tipoProduto.descricao == 'Botijas de Gás'){
+      this.esconderEstado = false;
+    }else{
+      this.esconderEstado = true;
+    }
+  }
 
   getAllCustomers() {
     this.entidadeService.customerNames()

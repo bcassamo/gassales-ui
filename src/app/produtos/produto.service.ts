@@ -8,6 +8,17 @@ export class ProdutoFiltro {
   itensPorPagina = 3;
 }
 
+export class Produto {
+  id?: bigint;
+  nome?: string;
+  descricao?: string;
+  referencia?: string;
+  tamanho?: bigint;
+  preco?: bigint;
+  id_tipo_produto?: bigint;
+  id_stock?: bigint;
+}
+
 @Injectable({
   providedIn: 'root'
 })

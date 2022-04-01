@@ -22,18 +22,26 @@
       <div class="col-12 md:col-6 p-fluid">
         <label style="display: block;">Produto</label>
         <p-dropdown [options]="produtos" optionLabel="nome" [filter]="true" placeholder="Pesquise pelo produto"
-          emptyFilterMessage="Nenhum produto encontrado" name="produto" ngModel #produto [required]="true"></p-dropdown>
+          emptyFilterMessage="Nenhum produto encontrado" name="produto" ngModel #produto [required]="true" (onChange)="escondeEstado($event)"></p-dropdown>
         <!--<input type="text" placeholder="Pesquise pelo produto" pInputText />-->
       </div>
 
-      <div class="col-12 md:col-6">
+      <div class="col-12 md:col-2 p-fluid" [hidden]="esconderEstado">
+        <label style="display: block;">Estado</label>
+        <p-dropdown [options]="estados" optionLabel="descricao" placeholder="Seleccione o estado"
+          name="estado" ngModel #estado [required]="true"></p-dropdown>
+      </div>
+
+      <div class="col-12 md:col-2 p-fluid">
         <label style="display: block;">Quantidade</label>
         <p-inputNumber [min]="0" [size]="6" name="quantidade" ngModel #quantidade="ngModel" [required]="true"></p-inputNumber>
 
-        <button pButton type="submit" label="Adicionar" style="margin: 0 15px;"></button>
-
         <app-message [control]="quantidade" error="required"
           text="Preencha a quantidade para o produto seleccionado"></app-message>
+      </div>
+
+      <div class="col-12 md:col-2 p-fluid">
+        <button pButton type="submit" label="Adicionar" style="margin: 15px 0;"></button>
       </div>
     </div>
 
