@@ -1,0 +1,50 @@
+<div class="container">
+  <form #novoProdutoForm="ngForm" autocomplete="off">
+    <div class="grid">
+      <div class="col-12">
+        <h1>Novo Produto</h1>
+      </div>
+
+      <div class="col-12 md:col-6 p-fluid">
+        <label style="display: block;">Nome</label>
+        <input type="text" pInputText name="nome" ngModel #nome="ngModel" required minlength="3"/>
+      </div>
+
+      <div class="col-12 md:col-3 p-fluid">
+        <label style="display: block;">Referência</label>
+        <input type="text" pInputText name="referencia" ngModel #referencia="ngModel" required minlength="3"/>
+      </div>
+
+      <div class="col-12 md:col-3 p-fluid">
+        <label style="display: block;">Tamanho</label>
+        <input type="text" pInputText name="tamanho" ngModel #tamanho="ngModel" required minlength="3"/>
+      </div>
+
+      <div class="col-12 md:col-4 p-fluid">
+        <label style="display: block;">Preço</label>
+        <input type="text" pInputText name="preco" ngModel #preco="ngModel" required minlength="3"/>
+      </div>
+
+      <div class="col-12 md:col-4 p-fluid">
+        <label style="display: block;">Tipo Produto</label>
+        <input type="text" pInputText name="tipoproduto" ngModel #tipoproduto="ngModel" required minlength="3"/>
+      </div>
+
+      <div class="col-12 md:col-4 p-fluid">
+        <label style="display: block;">Stock</label>
+        <input type="text" pInputText name="stock" ngModel #stock="ngModel" required minlength="3"/>
+      </div>
+
+      <div class="col-12 p-fluid">
+        <label style="display: block;">Descricao</label>
+        <textarea pInputTextarea [rows]="3" name="descricao" ngModel #descricao="ngModel"></textarea>
+      </div>
+
+      <div class="col-12">
+        <button pButton type="submit" label="Salvar" style="margin-right: 25px;" [disabled]="novoProdutoForm.invalid"></button>
+
+        <a href="javascript:;">Voltar para a pesquisa</a>
+      </div>
+    </div>
+  </form>
+</div>
