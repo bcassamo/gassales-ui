@@ -7,11 +7,14 @@ import { ButtonModule } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
 import { InputTextModule } from 'primeng/inputtext';
 
+import { InputTextareaModule } from 'primeng/inputtextarea';
 import { PesquisaProdutosComponent } from './pesquisa-produtos/pesquisa-produtos.component';
+import { NovoProdutoComponent } from './novo-produto/novo-produto.component';
 
 @NgModule({
   declarations: [
-    PesquisaProdutosComponent
+    PesquisaProdutosComponent,
+    NovoProdutoComponent
   ],
   imports: [
     CommonModule,
@@ -20,10 +23,12 @@ import { PesquisaProdutosComponent } from './pesquisa-produtos/pesquisa-produtos
     TableModule,
     ButtonModule,
     TooltipModule,
-    InputTextModule
+    InputTextModule,
+    InputTextareaModule
   ],
   exports: [
-    PesquisaProdutosComponent
+    PesquisaProdutosComponent,
+    NovoProdutoComponent
   ]
 })
 export class ProdutosModule { }
