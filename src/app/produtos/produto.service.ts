@@ -60,4 +60,8 @@ export class ProdutoService {
       .then((response: any) => response['content']);
   }
 
+  eliminar(codigo: number): Promise<void> {
+    return this.http.delete<void>(`${this.produtosUrl}/${codigo}`)
+      .toPromise();
+  }
 }
