@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
-import { LazyLoadEvent } from 'primeng/api';
+import { LazyLoadEvent, MessageService, ConfirmationService, ConfirmEventType } from 'primeng/api';
 import { Table } from 'primeng/table';
 
 import { EntidadeService, EntidadeFiltro } from './../entidade.service';
@@ -17,7 +17,10 @@ export class PesquisaEntidadeComponent implements OnInit {
   entidades: any = [];
   @ViewChild('tabela') grid!: Table;
 
-  constructor(private entidadeService: EntidadeService) { }
+  constructor(
+    private entidadeService: EntidadeService,
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService) { }
 
   ngOnInit(): void {
   }
@@ -37,20 +40,41 @@ export class PesquisaEntidadeComponent implements OnInit {
     this.pesquisar(pagina);
   }
 
+  confirmarExclusao(entidade: any): void {
+    this.confirmationService.confirm({
+      message: 'Tem certeza que deseja eliminar?',
+      accept: () => {
+          this.eliminar(entidade);
+      },
+      reject: (type: ConfirmEventType) => {
+          switch(type) {
+              case ConfirmEventType.REJECT:
+                  this.messageService.add({severity:'error', summary:'Rejeitado', detail:'Rejeitou a exclusão de ' + entidade.nome});
+              break;
+              case ConfirmEventType.CANCEL:
+                  this.messageService.add({severity:'warn', summary:'Cancelado', detail:'Cancelou a exclusão de ' + entidade.nome});
+              break;
+          }
+      }
+    });
+  }
+
   eliminar(entidade: any) {
     const currentPage: number = this.grid.first / this.grid.rows;
-    console.log(entidade);
+
     if(entidade.tipo === "CLIENTE") {
       this.entidadeService.eliminarCliente(entidade.id)
         .then(() => {
           this.pesquisar(currentPage);
           //this.grid.reset();
         });
+      this.messageService.add({ severity: 'success', detail: 'Cliente ' + entidade.nome + ' eliminado com sucesso!' })
     }else{
       this.entidadeService.eliminarFornecedor(entidade.id)
         .then(() => {
           this.pesquisar(currentPage);
         });
+        this.messageService.add({ severity: 'success', detail: 'Fornecedor ' + entidade.nome + ' eliminado com sucesso!' })
     }
 
   }
