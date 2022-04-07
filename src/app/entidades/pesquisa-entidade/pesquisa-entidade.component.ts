@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { LazyLoadEvent } from 'primeng/api';
+import { Table } from 'primeng/table';
 
 import { EntidadeService, EntidadeFiltro } from './../entidade.service';
 
@@ -14,6 +15,7 @@ export class PesquisaEntidadeComponent implements OnInit {
   totalRegistos: number = 0;
   filtro = new EntidadeFiltro();
   entidades: any = [];
+  @ViewChild('tabela') grid!: Table;
 
   constructor(private entidadeService: EntidadeService) { }
 
@@ -33,5 +35,23 @@ export class PesquisaEntidadeComponent implements OnInit {
   aoMudarPagina(event: LazyLoadEvent) {
     const pagina = event!.first! / event!.rows!;
     this.pesquisar(pagina);
+  }
+
+  eliminar(entidade: any) {
+    const currentPage: number = this.grid.first / this.grid.rows;
+    console.log(entidade);
+    if(entidade.tipo === "CLIENTE") {
+      this.entidadeService.eliminarCliente(entidade.id)
+        .then(() => {
+          this.pesquisar(currentPage);
+          //this.grid.reset();
+        });
+    }else{
+      this.entidadeService.eliminarFornecedor(entidade.id)
+        .then(() => {
+          this.pesquisar(currentPage);
+        });
+    }
+
   }
 }
