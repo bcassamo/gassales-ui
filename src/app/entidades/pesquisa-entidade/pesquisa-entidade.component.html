@@ -25,7 +25,8 @@
     <div class="col-12">
       <p-table [value]="entidades" responsiveLayout="scroll"
         [paginator]="true" [rows]="filtro.itensPorPagina" [lazy]="true"
-        [totalRecords]="totalRegistos" (onLazyLoad)="aoMudarPagina($event)">
+        [totalRecords]="totalRegistos" (onLazyLoad)="aoMudarPagina($event)"
+        #tabela>
         <ng-template pTemplate="header">
           <tr>
               <th>Nome</th>
@@ -47,7 +48,8 @@
               <td>{{entidade.endereco?.numero}}</td>
               <td class="col-accoes">
                 <button pButton icon="pi pi-pencil" pTooltip="Alterar" tooltipPosition="top"></button>
-                <button pButton icon="pi pi-trash" pTooltip="Eliminar" tooltipPosition="top"></button>
+                <button pButton icon="pi pi-trash" pTooltip="Eliminar" tooltipPosition="top"
+                  (click)="eliminar(entidade)"></button>
               </td>
           </tr>
         </ng-template>

@@ -77,4 +77,14 @@ export class EntidadeService {
         return resultado;
       });
   }
+
+  eliminarCliente(codigo: number): Promise<void> {
+    return this.http.delete<void>(`${this.entidadesUrl}/clientes/${codigo}`)
+      .toPromise();
+  }
+
+  eliminarFornecedor(codigo: number): Promise<void> {
+    return this.http.delete<void>(`${this.entidadesUrl}/fornecedores/${codigo}`)
+      .toPromise();
+  }
 }
