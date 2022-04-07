@@ -25,7 +25,8 @@
     <div class="col-12">
       <p-table [value]="produtos" responsiveLayout="scroll"
         [paginator]="true" [rows]="filtro.itensPorPagina" [lazy]="true"
-        [totalRecords]="totalRegistos" (onLazyLoad)="aoMudarPagina($event)">
+        [totalRecords]="totalRegistos" (onLazyLoad)="aoMudarPagina($event)"
+        #tabela>
         <ng-template pTemplate="header">
           <tr>
               <th>Nome</th>
@@ -45,7 +46,8 @@
               <td class="col-valor-content">{{produto.preco | currency:'MZN':''}}</td>
               <td class="col-accoes">
                 <button pButton icon="pi pi-pencil" pTooltip="Alterar" tooltipPosition="top"></button>
-                <button pButton icon="pi pi-trash" pTooltip="Eliminar" tooltipPosition="top"></button>
+                <button pButton icon="pi pi-trash" pTooltip="Eliminar" tooltipPosition="top"
+                (click)="confirmarExclusao(produto)"></button>
               </td>
           </tr>
         </ng-template>

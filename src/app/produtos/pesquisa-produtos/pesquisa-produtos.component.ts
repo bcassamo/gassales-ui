@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
-import { LazyLoadEvent } from 'primeng/api';
+import { Table } from 'primeng/table';
+import { LazyLoadEvent, MessageService, ConfirmationService, ConfirmEventType } from 'primeng/api';
 
 import { ProdutoService, ProdutoFiltro } from './../produto.service';
 
@@ -14,10 +15,14 @@ export class PesquisaProdutosComponent implements OnInit{
   totalRegistos: number = 0;
   filtro = new ProdutoFiltro();
   produtos: any = [];
+  @ViewChild('tabela') grid!: Table;
   //nome?: string;
   //referencia?: string;
 
-  constructor(private produtoService: ProdutoService) {}
+  constructor(
+    private produtoService: ProdutoService,
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService) {}
 
   ngOnInit(): void {
     //this.pesquisar();
@@ -36,5 +41,35 @@ export class PesquisaProdutosComponent implements OnInit{
   aoMudarPagina(event: LazyLoadEvent) {
     const pagina = event!.first! / event!.rows!;
     this.pesquisar(pagina);
+  }
+
+  confirmarExclusao(produto: any): void {
+    this.confirmationService.confirm({
+      message: 'Tem certeza que deseja eliminar?',
+      accept: () => {
+          this.eliminar(produto);
+      },
+      reject: (type: ConfirmEventType) => {
+          switch(type) {
+              case ConfirmEventType.REJECT:
+                  this.messageService.add({severity:'error', summary:'Rejeitado', detail:'Rejeitou a exclusão de ' + produto.nome});
+              break;
+              case ConfirmEventType.CANCEL:
+                  this.messageService.add({severity:'warn', summary:'Cancelado', detail:'Cancelou a exclusão de ' + produto.nome});
+              break;
+          }
+      }
+    });
+  }
+
+  eliminar(produto: any) {
+    const currentPage: number = this.grid.first / this.grid.rows;
+
+    this.produtoService.eliminar(produto.id)
+      .then(() => {
+        this.pesquisar(currentPage);
+        //this.grid.reset();
+      });
+    this.messageService.add({ severity: 'success', detail: 'Produto ' + produto.nome + ' eliminado com sucesso!' })
   }
 }
