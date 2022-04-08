@@ -4,6 +4,7 @@ import { Table } from 'primeng/table';
 import { LazyLoadEvent, MessageService, ConfirmationService, ConfirmEventType } from 'primeng/api';
 
 import { ProdutoService, ProdutoFiltro } from './../produto.service';
+import { ErrorHandlerService } from './../../core/error-handler.service';
 
 @Component({
   selector: 'app-pesquisa-produtos',
@@ -21,6 +22,7 @@ export class PesquisaProdutosComponent implements OnInit{
 
   constructor(
     private produtoService: ProdutoService,
+    private errorHandler: ErrorHandlerService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService) {}
 
@@ -35,7 +37,8 @@ export class PesquisaProdutosComponent implements OnInit{
       .then(products => {
         this.totalRegistos = products.total;
         this.produtos = products.produtos;
-      });
+      })
+      .catch(erro => this.errorHandler.handle(erro));
   }
 
   aoMudarPagina(event: LazyLoadEvent) {
@@ -69,7 +72,8 @@ export class PesquisaProdutosComponent implements OnInit{
       .then(() => {
         this.pesquisar(currentPage);
         //this.grid.reset();
-      });
-    this.messageService.add({ severity: 'success', detail: 'Produto ' + produto.nome + ' eliminado com sucesso!' })
+        this.messageService.add({ severity: 'success', detail: 'Produto ' + produto.nome + ' eliminado com sucesso!' });
+      })
+      .catch(erro => this.errorHandler.handle(erro));
   }
 }
