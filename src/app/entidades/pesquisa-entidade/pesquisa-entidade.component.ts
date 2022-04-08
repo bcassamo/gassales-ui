@@ -1,3 +1,4 @@
+import { ErrorHandlerService } from './../../core/error-handler.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { LazyLoadEvent, MessageService, ConfirmationService, ConfirmEventType } from 'primeng/api';
@@ -19,6 +20,7 @@ export class PesquisaEntidadeComponent implements OnInit {
 
   constructor(
     private entidadeService: EntidadeService,
+    private errorHandler: ErrorHandlerService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService) { }
 
@@ -32,7 +34,8 @@ export class PesquisaEntidadeComponent implements OnInit {
       .then(resultado => {
         this.totalRegistos = resultado.total;
         this.entidades = resultado.entities;
-      });
+      })
+      .catch(erro => this.errorHandler.handle(erro));
   }
 
   aoMudarPagina(event: LazyLoadEvent) {
@@ -67,14 +70,16 @@ export class PesquisaEntidadeComponent implements OnInit {
         .then(() => {
           this.pesquisar(currentPage);
           //this.grid.reset();
-        });
-      this.messageService.add({ severity: 'success', detail: 'Cliente ' + entidade.nome + ' eliminado com sucesso!' })
+          this.messageService.add({ severity: 'success', detail: 'Cliente ' + entidade.nome + ' eliminado com sucesso!' })
+        })
+        .catch(erro => this.errorHandler.handle(erro));
     }else{
       this.entidadeService.eliminarFornecedor(entidade.id)
         .then(() => {
           this.pesquisar(currentPage);
-        });
-        this.messageService.add({ severity: 'success', detail: 'Fornecedor ' + entidade.nome + ' eliminado com sucesso!' })
+          this.messageService.add({ severity: 'success', detail: 'Fornecedor ' + entidade.nome + ' eliminado com sucesso!' })
+        })
+        .catch(erro => this.errorHandler.handle(erro));
     }
 
   }
