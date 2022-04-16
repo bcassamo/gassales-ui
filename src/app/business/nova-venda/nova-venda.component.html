@@ -1,5 +1,5 @@
 <div class="container">
-  <form #novaVendaForm="ngForm" autocomplete="off">
+  <form #novaVendaForm="ngForm" autocomplete="off" (ngSubmit)="salvar(novaVendaForm)">
     <div class="grid">
       <div class="col-12">
         <h1>Nova Venda</h1>
@@ -7,10 +7,8 @@
 
       <div class="col-12 md:col-6 p-fluid">
         <label style="display: block;">Cliente</label>
-        <p-autoComplete [(ngModel)]="selectedCustomer" [suggestions]="filteredClients" (completeMethod)="search($event)"
+        <p-autoComplete [(ngModel)]="lancamento.entidade.nome" [suggestions]="filteredClients"  (completeMethod)="search($event)"
           name="cliente" #cliente="ngModel" [required]="true"></p-autoComplete>
-        <!--<input type="text" placeholder="Pesquise pelo cliente" pInputText
-          name="cliente" ngModel #cliente="ngModel" [required]="true"/>-->
 
         <app-message [control]="cliente" error="required"
           text="Preencha o nome do cliente"></app-message>
@@ -21,49 +19,54 @@
 
       <div class="col-12 md:col-6 p-fluid">
         <label style="display: block;">Produto</label>
-        <p-dropdown [options]="produtos" optionLabel="nome" [filter]="true" placeholder="Pesquise pelo produto"
-          emptyFilterMessage="Nenhum produto encontrado" name="produto" ngModel #produto [required]="true" (onChange)="escondeEstado($event)"></p-dropdown>
+        <p-dropdown [options]="produtos" [filter]="true" placeholder="Pesquise pelo produto"
+          emptyFilterMessage="Nenhum produto encontrado" name="produto" #produto [required]="true"
+          (onChange)="escondeEstado($event)" [(ngModel)]="lancamento.produto.id"></p-dropdown>
         <!--<input type="text" placeholder="Pesquise pelo produto" pInputText />-->
       </div>
 
       <div class="col-12 md:col-2 p-fluid" [hidden]="esconderEstado">
         <label style="display: block;">Estado</label>
-        <p-dropdown [options]="estados" optionLabel="descricao" placeholder="Seleccione o estado"
-          name="estado" ngModel #estado [required]="true"></p-dropdown>
+        <p-dropdown [options]="estados" placeholder="Seleccione o estado"
+          name="estado" ngModel #estado [required]="true" [(ngModel)]="lancamento.estado"></p-dropdown>
       </div>
 
       <div class="col-12 md:col-2 p-fluid">
         <label style="display: block;">Quantidade</label>
-        <p-inputNumber [min]="0" [size]="6" name="quantidade" ngModel #quantidade="ngModel" [required]="true"></p-inputNumber>
+        <p-inputNumber [min]="0" [size]="6" name="quantidade" ngModel #quantidade="ngModel" [required]="true"
+        [(ngModel)]="lancamento.quantidade"></p-inputNumber>
 
         <app-message [control]="quantidade" error="required"
           text="Preencha a quantidade para o produto seleccionado"></app-message>
       </div>
 
       <div class="col-12 md:col-2 p-fluid">
-        <button pButton type="submit" label="Adicionar" style="margin: 15px 0;"></button>
+        <button pButton type="submit" label="Adicionar" style="margin: 15px 0;" [disabled]="novaVendaForm.invalid"></button>
       </div>
     </div>
+  </form>
 
+  <form autocomplete="off" (ngSubmit)="finalizar()">
     <div class="grid">
       <div class="col-12">
-        <p-table [value]="lancamentos" [paginator]="true" [rows]="3"
-          responsiveLayout="scroll">
+        <p-table [value]="lancamentos" [paginator]="true"
+          responsiveLayout="scroll" [rows]="filtro.itensPorPagina" [lazy]="true"
+          [totalRecords]="totalRegistos" (onLazyLoad)="aoMudarPagina($event)">
           <ng-template pTemplate="header">
             <tr>
-                <th>Nome</th>
-                <th class="col-quantidade-header">Quantidade</th>
-                <th class="col-valor-header">Preço</th>
-                <th class="col-valor-header">Valor</th>
+                <th>Produto</th>
+                <th>Quantidade</th>
+                <th>Preço</th>
+                <th>Valor</th>
                 <th class="col-accoes-header"></th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-lancamento>
             <tr>
-                <td>{{lancamento.produto}}</td>
-                <td class="col-quantidade-content">{{lancamento.quantidade}}</td>
-                <td class="col-valor-content">{{lancamento.preco | currency: 'MZN':'' }}</td>
-                <td class="col-valor-content">{{lancamento.valorTotal | currency: 'MZN':'' }}</td>
+                <td>{{lancamento.produto.nome}}</td>
+                <td>{{lancamento.quantidade}}</td>
+                <td>{{lancamento.preco | currency: 'MZN':'' }}</td>
+                <td>{{lancamento.valorTotal | currency: 'MZN':'' }}</td>
                 <td class="col-accoes">
                   <button pButton icon="pi pi-pencil" pTooltip="Alterar" tooltipPosition="top"></button>
                   <button pButton icon="pi pi-trash" pTooltip="Eliminar" tooltipPosition="top"></button>
@@ -93,10 +96,10 @@
           <label>{{ valorT | currency: 'MZN':'' }} MTn</label>
         </div>
 
-        <div class="col-12">
-          <button pButton type="submit" label="Finalizar Venda" style="margin: 0 25px;" [disabled]="novaVendaForm.invalid"></button>
-
+        <div class="col-12" style="text-align: right;">
           <a href="javascript:;">Voltar para a pesquisa</a>
+
+          <button pButton type="submit" label="Finalizar Venda" style="margin: 0 25px;" [disabled]="novaVendaForm.invalid"></button>
         </div>
     </div>
   </form>
