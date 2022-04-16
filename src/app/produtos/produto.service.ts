@@ -1,6 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
+import { Produto } from '../core/model';
+
 export class ProdutoFiltro {
   nome?: string;
   referencia?: string;
@@ -8,16 +10,16 @@ export class ProdutoFiltro {
   itensPorPagina = 3;
 }
 
-export class Produto {
-  id?: bigint;
-  nome?: string;
-  descricao?: string;
-  referencia?: string;
-  tamanho?: bigint;
-  preco?: bigint;
-  id_tipo_produto?: bigint;
-  id_stock?: bigint;
-}
+//export class Produto {
+  //id?: bigint;
+  //nome?: string;
+  //descricao?: string;
+  //referencia?: string;
+  //tamanho?: bigint;
+  //preco?: bigint;
+  //id_tipo_produto?: bigint;
+  //id_stock?: bigint;
+//}
 
 @Injectable({
   providedIn: 'root'
@@ -58,6 +60,10 @@ export class ProdutoService {
     return this.http.get(this.produtosUrl)
       .toPromise()
       .then((response: any) => response['content']);
+  }
+
+  buscarPeloCodigo(codigo: number): Promise<Produto> {
+    return this.http.get<Produto>(`${ this.produtosUrl}/${codigo}`).toPromise();
   }
 
   eliminar(codigo: number): Promise<void> {
