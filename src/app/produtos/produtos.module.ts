@@ -5,8 +5,10 @@ import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
+import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 
+import { SharedModule } from './../shared/shared.module';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { PesquisaProdutosComponent } from './pesquisa-produtos/pesquisa-produtos.component';
 import { NovoProdutoComponent } from './novo-produto/novo-produto.component';
@@ -24,7 +26,10 @@ import { NovoProdutoComponent } from './novo-produto/novo-produto.component';
     ButtonModule,
     TooltipModule,
     InputTextModule,
-    InputTextareaModule
+    InputTextareaModule,
+    DropdownModule,
+
+    SharedModule
   ],
   exports: [
     PesquisaProdutosComponent,
