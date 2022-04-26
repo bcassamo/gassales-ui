@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -19,6 +20,7 @@ import { NovoProdutoComponent } from './novo-produto/novo-produto.component';
   imports: [
     CommonModule,
     FormsModule,
+    RouterModule,
 
     TableModule,
     ButtonModule,

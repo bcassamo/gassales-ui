@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { CommonModule, DatePipe } from '@angular/common';
 
 import { ToastModule } from 'primeng/toast';
@@ -15,6 +16,7 @@ import { ErrorHandlerService } from './error-handler.service';
   ],
   imports: [
     CommonModule,
+    RouterModule,
 
     ToastModule,
     ConfirmDialogModule

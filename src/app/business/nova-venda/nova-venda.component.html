@@ -78,12 +78,12 @@
     </div>
 
     <div class="grid">
-        <div class="col-12" style="margin: 10px; text-align: right;">
+        <div class="col-12" style="margin: 10px;">
           <label style="font-weight: normal;">Valor Total: </label>
           <label>{{ valorT | currency: 'MZN':'' }} MTn</label>
         </div>
 
-        <div class="col-12" style="margin: 10px; text-align: right;">
+        <div class="col-12" style="margin: 10px;">
           <label style="font-weight: normal;">Valor Pago: </label>
           <p-inputNumber mode="currency" currency="MZN" locale="pt-MZ" [min]="0" name="valor" ngModel #valor="ngModel" [required]="true"></p-inputNumber>
 
@@ -91,15 +91,15 @@
             text="Preencha o valor Pago"></app-message>
         </div>
 
-        <div class="col-12" style="margin: 10px; text-align: right;">
+        <div class="col-12" style="margin: 10px;">
           <label style="font-weight: normal;">Trocos: </label>
           <label>{{ valorT | currency: 'MZN':'' }} MTn</label>
         </div>
 
-        <div class="col-12" style="text-align: right;">
-          <a href="javascript:;">Voltar para a pesquisa</a>
+        <div class="col-12">
+          <button pButton type="submit" label="Finalizar Venda" style="margin: 25px 25px 0 0" [disabled]="novaVendaForm.invalid"></button>
 
-          <button pButton type="submit" label="Finalizar Venda" style="margin: 0 25px;" [disabled]="novaVendaForm.invalid"></button>
+          <a routerLink="/business/vendas">Voltar para a pesquisa</a>
         </div>
     </div>
   </form>
