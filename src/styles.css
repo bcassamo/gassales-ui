@@ -6,11 +6,17 @@ body {
 }
 
 a {
+  color: #6d5acf;
   text-decoration: none;
 }
 
 a:hover, a:focus {
   text-decoration: underline;
+}
+
+a.p-button:hover,
+a.p-button:focus {
+  text-decoration: none;
 }
 
 label {
