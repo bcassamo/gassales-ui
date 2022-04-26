@@ -9,12 +9,12 @@
 
   <ul class="navbar-menu" [hidden]="!exibindoMenu">
     <li class="navbar-usuario">Samy Aly</li>
-    <li class="navbar-menuitem"><a href="#">Dashboard</a></li>
-    <li class="navbar-menuitem"><a href="#">Vendas</a></li>
-    <li class="navbar-menuitem"><a href="#">Aquisições</a></li>
-    <li class="navbar-menuitem"><a href="#">Entidades</a></li>
-    <li class="navbar-menuitem"><a href="#">Produtos</a></li>
-    <li class="navbar-menuitem"><a href="#">Relatórios</a></li>
+    <li class="navbar-menuitem" routerLinkActive="activo"><a href="#">Dashboard</a></li>
+    <li class="navbar-menuitem"  routerLinkActive="activo"><a routerLink="/business/vendas">Vendas</a></li>
+    <li class="navbar-menuitem" routerLinkActive="activo"><a href="#">Aquisições</a></li>
+    <li class="navbar-menuitem" routerLinkActive="activo"><a routerLink="/entidades">Entidades</a></li>
+    <li class="navbar-menuitem" routerLinkActive="activo"><a routerLink="/produtos">Produtos</a></li>
+    <li class="navbar-menuitem" routerLinkActive="activo"><a href="#">Relatórios</a></li>
     <li class="navbar-menuitem"><a href="#">Logout</a></li>
   </ul>
 </nav>

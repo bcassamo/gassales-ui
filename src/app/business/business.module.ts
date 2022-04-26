@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -25,6 +26,7 @@ import { PesquisaVendaComponent } from './pesquisa-venda/pesquisa-venda.componen
     CommonModule,
     FormsModule,
     HttpClientModule,
+    RouterModule,
 
     TableModule,
     ButtonModule,
