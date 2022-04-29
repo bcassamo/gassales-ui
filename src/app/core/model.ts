@@ -4,11 +4,18 @@ export class Stock {
   produto = new Produto();
 }
 
+export class Endereco {
+  bairro?: string;
+  rua?: string;
+  numero?: string;
+}
+
 export class Entidade {
   id?: number;
   nome?:string;
   nuit?:string;
   tipo = 'CLIENTE';
+  endereco = new Endereco();
 }
 
 export class TipoProduto {

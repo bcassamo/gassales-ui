@@ -1,6 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
+import { Entidade } from './../core/model';
+
 export class EntidadeFiltro {
   nome?: string;
   nuit?: string;
@@ -85,6 +87,11 @@ export class EntidadeService {
 
   eliminarFornecedor(codigo: number): Promise<void> {
     return this.http.delete<void>(`${this.entidadesUrl}/fornecedores/${codigo}`)
+      .toPromise();
+  }
+
+  adicionar(entidade: Entidade): Promise<Entidade> {
+    return this.http.post<Entidade>(this.entidadesUrl, entidade)
       .toPromise();
   }
 }
