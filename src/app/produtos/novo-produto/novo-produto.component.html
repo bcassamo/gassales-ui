@@ -1,5 +1,5 @@
 <div class="container">
-  <form #novoProdutoForm="ngForm" autocomplete="off">
+  <form #novoProdutoForm="ngForm" autocomplete="off" (ngSubmit)=salvar(novoProdutoForm)>
     <div class="grid">
       <div class="col-12">
         <h1>Novo Produto</h1>
@@ -7,7 +7,8 @@
 
       <div class="col-12 md:col-6 p-fluid">
         <label style="display: block;">Nome</label>
-        <input type="text" pInputText name="nome" ngModel #nome="ngModel" required minlength="3"/>
+        <input type="text" pInputText name="nome" ngModel #nome="ngModel" required minlength="3"
+          [(ngModel)]="produto.nome"/>
 
         <app-message [control]="nome" error="required"
           text="Preencha o nome do produto"></app-message>
@@ -18,15 +19,17 @@
 
       <div class="col-12 md:col-3 p-fluid">
         <label style="display: block;">Referência</label>
-        <input type="text" pInputText name="referencia" ngModel #referencia="ngModel" minlength="3"/>
+        <input type="text" pInputText name="referencia" ngModel #referencia="ngModel" minlength="3"
+          [(ngModel)]="produto.referencia"/>
 
-        <app-message [control]="nome" error="minlength"
-          text="Deve ter no mínimo {{ nome.errors?.minlength?.requiredLength }} caracteres"></app-message>
+        <app-message [control]="referencia" error="minlength"
+          text="Deve ter no mínimo {{ referencia.errors?.minlength?.requiredLength }} caracteres"></app-message>
       </div>
 
       <div class="col-12 md:col-3 p-fluid">
         <label style="display: block;">Tamanho</label>
-        <input type="text" pInputText name="tamanho" ngModel #tamanho="ngModel" required/>
+        <p-inputNumber [min]="0" name="tamanho" ngModel #tamanho="ngModel" [required]="true"
+          [(ngModel)]="produto.tamanho"></p-inputNumber>
 
         <app-message [control]="tamanho" error="required"
           text="Preencha o tamanho do produto"></app-message>
@@ -34,7 +37,8 @@
 
       <div class="col-12 md:col-5 p-fluid">
         <label style="display: block;">Preço</label>
-        <input type="text" pInputText name="preco" ngModel #preco="ngModel" required/>
+        <p-inputNumber mode="currency" currency="MZN" locale="pt-MZ" [min]="0" name="preco"
+          ngModel #preco="ngModel" [(ngModel)]="produto.preco" [required]="true"></p-inputNumber>
 
         <app-message [control]="preco" error="required"
           text="Preencha o preco do produto"></app-message>
@@ -42,26 +46,26 @@
 
       <div class="col-12 md:col-5 p-fluid">
         <label style="display: block;">Tipo Produto</label>
-        <!--<input type="text" pInputText name="tipoproduto" ngModel #tipoproduto="ngModel" required minlength="3"/> -->
+        <!--<input type="text" pInputText name="tipoproduto" ngModel #tipoproduto="ngModel" required minlength="3"/>-->
         <p-dropdown [options]="tipoprodutos" [filter]="true" placeholder="Pesquise pelo tipo de produto"
           emptyFilterMessage="Nenhum tipo encontrado" name="tipoproduto" #tipoproduto [required]="true"
           [(ngModel)]="produto.tipoProduto.id"></p-dropdown>
-
-        <app-message [control]="tipoproduto" error="required"
-          text="Preencha o tipo do produto"></app-message>
       </div>
 
+      <!--
       <div class="col-12 md:col-2 p-fluid">
         <label style="display: block;">Quantidade</label>
         <input type="text" pInputText name="stock" ngModel #stock="ngModel" required minlength="3"/>
 
+
         <app-message [control]="stock" error="required"
           text="Preencha o stock do produto"></app-message>
-      </div>
+      </div>-->
 
       <div class="col-12 p-fluid">
         <label style="display: block;">Descricao</label>
-        <textarea pInputTextarea [rows]="3" name="descricao" ngModel #descricao="ngModel"></textarea>
+        <textarea pInputTextarea [rows]="3" name="descricao" ngModel #descricao="ngModel"
+          [(ngModel)]="produto.descricao"></textarea>
       </div>
 
       <div class="col-12">

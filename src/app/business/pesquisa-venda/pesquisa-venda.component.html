@@ -42,8 +42,8 @@
         </ng-template>
         <ng-template pTemplate="body" let-busines>
           <tr>
-              <td>{{busines.lancamento?.entidade?.nome}}</td>
-              <td>{{busines.lancamento?.entidade?.nuit}}</td>
+              <td>{{busines.entidade?.nome}}</td>
+              <td>{{busines.entidade?.nuit}}</td>
               <td>{{busines.dataBusiness | date:'dd-MM-y'}}</td>
               <td>{{busines.lancamento?.valorTotal}}</td>
               <td class="col-accoes">

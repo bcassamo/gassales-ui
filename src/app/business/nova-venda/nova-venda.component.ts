@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { LazyLoadEvent, MessageService } from 'primeng/api';
 
-import { Lancamento, Produto } from './../../core/model';
+import { Lancamento, Produto, Business } from './../../core/model';
 import { ProdutoService } from './../../produtos/produto.service';
 import { EntidadeService } from './../../entidades/entidade.service';
 import { ErrorHandlerService } from './../../core/error-handler.service';
@@ -29,6 +29,7 @@ export class NovaVendaComponent implements OnInit {
   estados = ['CHEIA', 'VAZIA', 'NA'];
 
   lancamento: Lancamento = new Lancamento();
+  business: Business = new Business();
 
   valorT = 15000;
 

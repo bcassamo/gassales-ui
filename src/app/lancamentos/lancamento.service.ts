@@ -31,6 +31,11 @@ export class LancamentoService {
       .toPromise();
   }
 
+  salvar(lancamento: Lancamento): Promise<Lancamento> {
+    return this.http.post<Lancamento>(`${this.lancamentosUrl}`, lancamento)
+      .toPromise();
+  }
+
   listarTodos() : Promise<any> {
     return this.http.get(this.lancamentosUrl)
       .toPromise()

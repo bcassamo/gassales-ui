@@ -6,7 +6,8 @@
       </div>
 
       <div class="col-12">
-        <p-selectButton [options]="tipos" #tipo></p-selectButton>
+        <p-selectButton [options]="tipos" #tipo name="tipo"
+          [(ngModel)]="entidade.tipo"></p-selectButton>
       </div>
 
       <div class="col-12 md:col-9 p-fluid">
