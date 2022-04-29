@@ -12,10 +12,6 @@ export class TipoprodutoService {
 
   listarTodos() : Promise<any> {
     return this.http.get(this.tiposprodutoUrl)
-      .toPromise()
-      .then((response: any) => {
-        response['content'];
-        return response['content'];
-      });
+      .toPromise();
   }
 }

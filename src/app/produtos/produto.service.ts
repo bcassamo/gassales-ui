@@ -70,4 +70,9 @@ export class ProdutoService {
     return this.http.delete<void>(`${this.produtosUrl}/${codigo}`)
       .toPromise();
   }
+
+  adicionar(produto: Produto): Promise<Produto> {
+    return this.http.post<Produto>(this.produtosUrl, produto)
+      .toPromise();
+  }
 }
