@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -14,6 +13,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 
 import { SharedModule } from './../shared/shared.module';
+import { BusinessRoutingModule } from './business-routing.module';
 import { NovaVendaComponent } from './nova-venda/nova-venda.component';
 import { PesquisaVendaComponent } from './pesquisa-venda/pesquisa-venda.component';
 
@@ -26,7 +26,6 @@ import { PesquisaVendaComponent } from './pesquisa-venda/pesquisa-venda.componen
     CommonModule,
     FormsModule,
     HttpClientModule,
-    RouterModule,
 
     TableModule,
     ButtonModule,
@@ -37,7 +36,8 @@ import { PesquisaVendaComponent } from './pesquisa-venda/pesquisa-venda.componen
     InputNumberModule,
     AutoCompleteModule,
 
-    SharedModule
+    SharedModule,
+    BusinessRoutingModule
   ],
   exports: [
     NovaVendaComponent,

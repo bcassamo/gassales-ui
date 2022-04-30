@@ -1,10 +1,10 @@
-import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
 import { NovaEntidadeComponent } from './nova-entidade/nova-entidade.component';
 import { PesquisaEntidadeComponent } from './pesquisa-entidade/pesquisa-entidade.component';
 
-const routes: Routes = [
+const entidadesRoutes: Routes = [
   { path: 'entidades', component: PesquisaEntidadeComponent },
   { path: 'entidades/nova', component: NovaEntidadeComponent },
   { path: 'entidades/:id', component: NovaEntidadeComponent }
@@ -12,7 +12,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forChild(routes)
+    RouterModule.forChild(entidadesRoutes)
   ],
   exports: [RouterModule]
 })
