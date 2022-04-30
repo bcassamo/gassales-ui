@@ -1,3 +1,4 @@
+import { Title } from '@angular/platform-browser';
 import { Component, OnInit } from '@angular/core';
 
 import { LazyLoadEvent } from 'primeng/api';
@@ -18,9 +19,13 @@ export class PesquisaVendaComponent implements OnInit {
   //dataVendaInicio?: Date;
   //dataVendaFim?: Date;
 
-  constructor(private businessService: BusinessService) {}
+  constructor(
+    private businessService: BusinessService,
+    private title: Title
+    ) {}
 
   ngOnInit(): void {
+    this.title.setTitle('Pesquisa de vendas');
       //this.pesquisar();
   }
 

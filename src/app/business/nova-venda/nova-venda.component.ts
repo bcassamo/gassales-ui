@@ -1,4 +1,5 @@
 import { NgForm } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { Component, OnInit } from '@angular/core';
 
 import { LazyLoadEvent, MessageService } from 'primeng/api';
@@ -38,10 +39,12 @@ export class NovaVendaComponent implements OnInit {
     private produtoService: ProdutoService,
     private lancamentoService: LancamentoService,
     private errorHandler: ErrorHandlerService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private title: Title
   ) {}
 
   ngOnInit(): void {
+    this.title.setTitle('Nova venda');
     this.getAllCustomers();
     this.getAllProducts();
 

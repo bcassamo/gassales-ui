@@ -80,18 +80,33 @@ export class EntidadeService {
       });
   }
 
-  eliminarCliente(codigo: number): Promise<void> {
-    return this.http.delete<void>(`${this.entidadesUrl}/clientes/${codigo}`)
+  eliminar(entidade: Entidade): Promise<void> {
+    if(entidade.tipo === "CLIENTE") {
+      return this.http.delete<void>(`${this.entidadesUrl}/clientes/${entidade.id}`)
+        .toPromise();
+    } else {
+      return this.http.delete<void>(`${this.entidadesUrl}/fornecedores/${entidade.id}`)
       .toPromise();
-  }
-
-  eliminarFornecedor(codigo: number): Promise<void> {
-    return this.http.delete<void>(`${this.entidadesUrl}/fornecedores/${codigo}`)
-      .toPromise();
+    }
   }
 
   adicionar(entidade: Entidade): Promise<Entidade> {
     return this.http.post<Entidade>(this.entidadesUrl, entidade)
+      .toPromise();
+  }
+
+  actualizar(entidade: Entidade): Promise<Entidade> {
+    if(entidade.tipo === "CLIENTE") {
+      return this.http.put<Entidade>(`${this.entidadesUrl}/clientes/${entidade.id}`, entidade)
+        .toPromise();
+    } else {
+      return this.http.put<Entidade>(`${this.entidadesUrl}/fornecedores/${entidade.id}`, entidade)
+        .toPromise();
+    }
+  }
+
+  buscarPeloCodigo(codigo: number): Promise<Entidade> {
+    return this.http.get<Entidade>(`${ this.entidadesUrl}/${codigo}`)
       .toPromise();
   }
 }

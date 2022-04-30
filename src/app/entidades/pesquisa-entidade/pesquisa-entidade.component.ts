@@ -1,10 +1,12 @@
-import { ErrorHandlerService } from './../../core/error-handler.service';
+import { Title } from '@angular/platform-browser';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
-import { LazyLoadEvent, MessageService, ConfirmationService, ConfirmEventType } from 'primeng/api';
 import { Table } from 'primeng/table';
+import { LazyLoadEvent, MessageService, ConfirmationService, ConfirmEventType } from 'primeng/api';
 
+import { Entidade } from './../../core/model';
 import { EntidadeService, EntidadeFiltro } from './../entidade.service';
+import { ErrorHandlerService } from './../../core/error-handler.service';
 
 @Component({
   selector: 'app-pesquisa-entidade',
@@ -22,9 +24,12 @@ export class PesquisaEntidadeComponent implements OnInit {
     private entidadeService: EntidadeService,
     private errorHandler: ErrorHandlerService,
     private messageService: MessageService,
-    private confirmationService: ConfirmationService) { }
+    private confirmationService: ConfirmationService,
+    private title: Title
+  ) { }
 
   ngOnInit(): void {
+    this.title.setTitle('Pesquisa de Entidades');
   }
 
   pesquisar(pagina: number = 0) {
@@ -43,7 +48,7 @@ export class PesquisaEntidadeComponent implements OnInit {
     this.pesquisar(pagina);
   }
 
-  confirmarExclusao(entidade: any): void {
+  confirmarExclusao(entidade: Entidade): void {
     this.confirmationService.confirm({
       message: 'Tem certeza que deseja eliminar?',
       accept: () => {
@@ -62,25 +67,15 @@ export class PesquisaEntidadeComponent implements OnInit {
     });
   }
 
-  eliminar(entidade: any) {
+  eliminar(entidade: Entidade) {
     const currentPage: number = this.grid.first / this.grid.rows;
 
-    if(entidade.tipo === "CLIENTE") {
-      this.entidadeService.eliminarCliente(entidade.id)
-        .then(() => {
-          this.pesquisar(currentPage);
-          //this.grid.reset();
-          this.messageService.add({ severity: 'success', detail: 'Cliente ' + entidade.nome + ' eliminado com sucesso!' })
-        })
-        .catch(erro => this.errorHandler.handle(erro));
-    }else{
-      this.entidadeService.eliminarFornecedor(entidade.id)
-        .then(() => {
-          this.pesquisar(currentPage);
-          this.messageService.add({ severity: 'success', detail: 'Fornecedor ' + entidade.nome + ' eliminado com sucesso!' })
-        })
-        .catch(erro => this.errorHandler.handle(erro));
-    }
-
+    this.entidadeService.eliminar(entidade)
+      .then(() => {
+        this.pesquisar(currentPage);
+        //this.grid.reset();
+        this.messageService.add({ severity: 'success', detail: entidade.tipo + ' ' + entidade.nome + ' eliminado com sucesso!' })
+      })
+      .catch(erro => this.errorHandler.handle(erro));
   }
 }
