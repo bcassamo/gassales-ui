@@ -47,7 +47,8 @@
               <td>{{entidade.endereco?.rua}}</td>
               <td>{{entidade.endereco?.numero}}</td>
               <td class="col-accoes">
-                <button pButton icon="pi pi-pencil" pTooltip="Alterar" tooltipPosition="top"></button>
+                <button pButton icon="pi pi-pencil" pTooltip="Alterar" tooltipPosition="top"
+                  [routerLink]="['/entidades', entidade.id]"></button>
                 <button pButton icon="pi pi-trash" pTooltip="Eliminar" tooltipPosition="top"
                   (click)="confirmarExclusao(entidade)"></button>
               </td>

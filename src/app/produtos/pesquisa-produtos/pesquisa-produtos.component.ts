@@ -1,3 +1,4 @@
+import { Title } from '@angular/platform-browser';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { Table } from 'primeng/table';
@@ -24,10 +25,13 @@ export class PesquisaProdutosComponent implements OnInit{
     private produtoService: ProdutoService,
     private errorHandler: ErrorHandlerService,
     private messageService: MessageService,
-    private confirmationService: ConfirmationService) {}
+    private confirmationService: ConfirmationService,
+    private title: Title
+  ) {}
 
   ngOnInit(): void {
     //this.pesquisar();
+    this.title.setTitle('Pesquisa de Produtos');
   }
 
   pesquisar(pagina: number = 0) {

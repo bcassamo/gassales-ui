@@ -2,7 +2,7 @@
   <form #novoProdutoForm="ngForm" autocomplete="off" (ngSubmit)=salvar(novoProdutoForm)>
     <div class="grid">
       <div class="col-12">
-        <h1>Novo Produto</h1>
+        <h1>{{editando ? 'Edição de' : 'Novo' }} Produto</h1>
       </div>
 
       <div class="col-12 md:col-6 p-fluid">
@@ -70,7 +70,8 @@
 
       <div class="col-12">
         <button pButton type="submit" label="Salvar" style="margin-right: 25px;" [disabled]="novoProdutoForm.invalid"></button>
-
+        <button pButton type="button" label="Novo" style="margin-right: 25px;" class="p-button-info"
+          (click)="novo(novoProdutoForm)"></button>
         <a routerLink="/produtos">Voltar para a pesquisa</a>
       </div>
     </div>

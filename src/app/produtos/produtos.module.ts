@@ -12,6 +12,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 
 import { SharedModule } from './../shared/shared.module';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { ProdutosRoutingModule } from './produtos-routing.module';
 import { PesquisaProdutosComponent } from './pesquisa-produtos/pesquisa-produtos.component';
 import { NovoProdutoComponent } from './novo-produto/novo-produto.component';
 
@@ -23,7 +24,6 @@ import { NovoProdutoComponent } from './novo-produto/novo-produto.component';
   imports: [
     CommonModule,
     FormsModule,
-    RouterModule,
 
     TableModule,
     ButtonModule,
@@ -33,11 +33,9 @@ import { NovoProdutoComponent } from './novo-produto/novo-produto.component';
     InputTextareaModule,
     DropdownModule,
 
-    SharedModule
+    SharedModule,
+    ProdutosRoutingModule
   ],
-  exports: [
-    PesquisaProdutosComponent,
-    NovoProdutoComponent
-  ]
+  exports: []
 })
 export class ProdutosModule { }

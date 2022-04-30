@@ -1,8 +1,8 @@
-import { RouterModule } from '@angular/router';
-import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { SharedModule } from './../shared/shared.module';
 
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
@@ -11,20 +11,18 @@ import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { SelectButtonModule } from 'primeng/selectbutton';
 
+import { EntidadesRoutingModule } from './entidades-routing.module';
 import { NovaEntidadeComponent } from './nova-entidade/nova-entidade.component';
-import { PesquisaClienteComponent } from './pesquisa-cliente/pesquisa-cliente.component';
 import { PesquisaEntidadeComponent } from './pesquisa-entidade/pesquisa-entidade.component';
 
 @NgModule({
   declarations: [
     NovaEntidadeComponent,
-    PesquisaClienteComponent,
     PesquisaEntidadeComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
-    RouterModule,
 
     TableModule,
     ButtonModule,
@@ -33,12 +31,9 @@ import { PesquisaEntidadeComponent } from './pesquisa-entidade/pesquisa-entidade
     InputNumberModule,
     SelectButtonModule,
 
-    SharedModule
+    SharedModule,
+    EntidadesRoutingModule
   ],
-  exports: [
-    NovaEntidadeComponent,
-    PesquisaClienteComponent,
-    PesquisaEntidadeComponent
-  ]
+  exports: []
 })
 export class EntidadesModule { }

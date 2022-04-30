@@ -45,7 +45,8 @@
               <td class="col-quantidade-content">{{produto.stock?.quantidade}}</td>
               <td class="col-valor-content">{{produto.preco | currency:'MZN':''}}</td>
               <td class="col-accoes">
-                <button pButton icon="pi pi-pencil" pTooltip="Alterar" tooltipPosition="top"></button>
+                <button pButton icon="pi pi-pencil" pTooltip="Alterar" tooltipPosition="top"
+                  [routerLink]="['/produtos', produto.id]"></button>
                 <button pButton icon="pi pi-trash" pTooltip="Eliminar" tooltipPosition="top"
                 (click)="confirmarExclusao(produto)"></button>
               </td>

@@ -75,4 +75,9 @@ export class ProdutoService {
     return this.http.post<Produto>(this.produtosUrl, produto)
       .toPromise();
   }
+
+  actualizar(produto: Produto): Promise<Produto> {
+    return this.http.put<Produto>(`${this.produtosUrl}/${produto.id}`, produto)
+      .toPromise();
+  }
 }
