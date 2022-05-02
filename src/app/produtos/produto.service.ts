@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { Produto } from '../core/model';
+import { environment } from './../../environments/environment.prod';
 
 export class ProdutoFiltro {
   nome?: string;
@@ -26,9 +27,11 @@ export class ProdutoFiltro {
 })
 export class ProdutoService {
 
-  produtosUrl = 'http://localhost:8080/produtos';
+  produtosUrl: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.produtosUrl = `${environment.apiUrl}/produtos`;
+  }
 
   pesquisar(filtro: ProdutoFiltro) : Promise<any> {
     let params = new HttpParams();

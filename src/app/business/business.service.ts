@@ -1,6 +1,8 @@
 import { DatePipe } from '@angular/common';
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+
+import { environment } from './../../environments/environment.prod';
 
 export class BusinessFiltro {
   dataBusinessInicio?: Date;
@@ -14,9 +16,11 @@ export class BusinessFiltro {
 })
 export class BusinessService {
 
-  vendasUrl = 'http://localhost:8080/business';
+  vendasUrl: string;
 
-  constructor(private http: HttpClient, private datePipe: DatePipe) { }
+  constructor(private http: HttpClient, private datePipe: DatePipe) {
+    this.vendasUrl = `${environment.apiUrl}/business`;
+  }
 
   pesquisarVenda(filtro: BusinessFiltro): Promise<any> {
     let params = new HttpParams();
