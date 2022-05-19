@@ -17,6 +17,7 @@ export class PesquisaProdutosComponent implements OnInit{
   totalRegistos: number = 0;
   filtro = new ProdutoFiltro();
   produtos: any = [];
+
   @ViewChild('tabela') grid!: Table;
   //nome?: string;
   //referencia?: string;

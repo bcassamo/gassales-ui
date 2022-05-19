@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
-import { Lancamento } from './../core/model';
+import { Lancamento, Produto } from './../core/model';
+import { ProdutoService } from './../produtos/produto.service';
+import { environment } from './../../environments/environment.prod';
 
 export class LancamentoFiltro {
   descricao?: string;
@@ -19,12 +21,25 @@ export class LancamentoFiltro {
 })
 export class LancamentoService {
 
-  lancamentosUrl = 'http://localhost:8080/lancamentos';
+  lancamentosUrl: string;
+  lancamentos: Lancamento[] = [];
 
   constructor(
     private http: HttpClient,
-    private datePipe: DatePipe
-    ) { }
+    private datePipe: DatePipe,
+    private produtoService: ProdutoService
+    ) {
+      this.lancamentosUrl = `${environment.apiUrl}/lancamentos`;
+    }
+
+  adicionarLancamento(lancamento: Lancamento) {
+    const productId: any = lancamento.produto.id;
+    this.produtoService.buscarPeloCodigo(productId)
+      .then((produto: Produto) => {
+        lancamento.produto = produto;
+      })
+    this.lancamentos.push(lancamento);
+  }
 
   adicionar(lancamento: Lancamento): Promise<Lancamento> {
     return this.http.post<Lancamento>(`${this.lancamentosUrl}/business`, lancamento)
@@ -76,5 +91,12 @@ export class LancamentoService {
         };
         return resultado;
       });
+  }
+
+  getLancamentos() {
+    for(let i = 0; i < this.lancamentos.length; i++) {
+      console.log('array ' + this.lancamentos[i].produto.nome);
+    }
+    return this.lancamentos;
   }
 }

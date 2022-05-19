@@ -1,7 +1,8 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { Entidade } from './../core/model';
+import { environment } from './../../environments/environment.prod';
 
 export class EntidadeFiltro {
   nome?: string;
@@ -15,9 +16,11 @@ export class EntidadeFiltro {
 })
 export class EntidadeService {
 
-  entidadesUrl = 'http://localhost:8080/entidades';
+  entidadesUrl: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.entidadesUrl = `${environment.apiUrl}/entidades`;
+  }
 
   pesquisarClientes(filtro: EntidadeFiltro) : Promise<any> {
     let params = new HttpParams();
