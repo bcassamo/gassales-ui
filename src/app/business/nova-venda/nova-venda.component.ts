@@ -20,14 +20,14 @@ export class NovaVendaComponent implements OnInit {
   dataLancamento = new Date(Date.now());
   totalRegistos: number = 0;
   filtro = new LancamentoFiltro();
-  lancamentos: any[] = [];
+  carrinhoProdutos: any[] = [];
   cliente?: string;
 
   filteredClients: any[] = [];
   customers: any[] = [];
   produtos: any[] = [];
   esconderEstado: boolean = true;
-  estados = ['CHEIA', 'VAZIA', 'NA'];
+  estados = ['CHEIA', 'VAZIA'];
 
   lancamento: Lancamento = new Lancamento();
   business: Business = new Business();
@@ -61,14 +61,22 @@ export class NovaVendaComponent implements OnInit {
     this.lancamento.descricao = "Venda"
     this.lancamento.dataLancamento = this.dataLancamento;
 
-    this.lancamentoService.adicionar(this.lancamento)
-      .then(() => {
-        this.messageService.add({ severity: 'success', detail: 'Lançamento adicionado com sucesso!' });
+    this.lancamentoService.adicionarLancamento(this.lancamento);
+      //.then(() => {
+        //this.messageService.add({ severity: 'success', detail: 'Lançamento adicionado com sucesso!' });
 
-        novaVendaForm.reset();
-        this.lancamento = new Lancamento();
-      })
-      .catch(erro => this.errorHandler.handle(erro));
+        //novaVendaForm.reset();
+        //this.lancamento = new Lancamento();
+      //})
+      //.catch(erro => this.errorHandler.handle(erro));
+  }
+
+  adicionarAoCarrinho(novaVendaForm: NgForm) {
+    this.lancamento.descricao = "Venda"
+    this.lancamento.dataLancamento = this.dataLancamento;
+
+    this.lancamentoService.adicionarLancamento(this.lancamento);
+
   }
 
   finalizar(){}
@@ -87,18 +95,24 @@ export class NovaVendaComponent implements OnInit {
     this.filtro.pagina = pagina;
     this.filtro.dataLancamentoDe = new Date();
     this.filtro.dataLancamentoAte = new Date();
-
     this.lancamentoService.pesquisarLancamentos(this.filtro)
       .then(resultado => {
         this.totalRegistos = resultado.total;
-        this.lancamentos = resultado.lancamentos;
+        //this.lancamentos = resultado.lancamentos;
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
 
   aoMudarPagina(event: LazyLoadEvent) {
-    const pagina = event!.first! / event!.rows!;
-    this.pesquisar(pagina);
+    //const pagina = event!.first! / event!.rows!;
+    //this.pesquisar(pagina);
+    this.getAllLancamentos();
+  }
+
+  getAllLancamentos() {
+    //this.totalRegistos = this.lancamentoService.retornarLancamentos().total;
+    this.carrinhoProdutos = this.lancamentoService.getLancamentos();
+    console.log('Carrinho ' + this.carrinhoProdutos);
   }
 
   getAllCustomers() {

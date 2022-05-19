@@ -40,7 +40,7 @@ export class Lancamento {
   descricao?:string;
   dataLancamento?: Date;
   estado = 'NA';
-  preco?: number;
+  //preco?: number;
   quantidade?: number;
   valorTotal?: number;
   produto = new Produto();

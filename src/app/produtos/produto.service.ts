@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
+import { Stock } from './../core/model';
 import { Produto } from '../core/model';
 import { environment } from './../../environments/environment.prod';
 
@@ -67,6 +68,10 @@ export class ProdutoService {
 
   buscarPeloCodigo(codigo: number): Promise<Produto> {
     return this.http.get<Produto>(`${ this.produtosUrl}/${codigo}`).toPromise();
+  }
+
+  buscarStockDoProduto(codigo: number): Promise<Stock> {
+    return this.http.get<Stock>(`${ this.produtosUrl}/${codigo}/stock`).toPromise();
   }
 
   eliminar(codigo: number): Promise<void> {
