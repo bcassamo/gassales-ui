@@ -16,11 +16,13 @@ import { SharedModule } from './../shared/shared.module';
 import { BusinessRoutingModule } from './business-routing.module';
 import { NovaVendaComponent } from './nova-venda/nova-venda.component';
 import { PesquisaVendaComponent } from './pesquisa-venda/pesquisa-venda.component';
+import { PesquisaAquisicaoComponent } from './pesquisa-aquisicao/pesquisa-aquisicao.component';
 
 @NgModule({
   declarations: [
     NovaVendaComponent,
-    PesquisaVendaComponent
+    PesquisaVendaComponent,
+    PesquisaAquisicaoComponent
   ],
   imports: [
     CommonModule,

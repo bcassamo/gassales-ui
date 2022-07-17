@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
-import { Lancamento, Produto } from './../core/model';
+import { Lancamento, Produto, Business } from './../core/model';
 import { ProdutoService } from './../produtos/produto.service';
 import { environment } from './../../environments/environment.prod';
 
@@ -33,16 +33,34 @@ export class LancamentoService {
     }
 
   adicionarLancamento(lancamento: Lancamento) {
-    const productId: any = lancamento.produto.id;
+    let novolancamento: Lancamento = new Lancamento();
+    novolancamento.produto.id = lancamento.produto.id;
+    novolancamento.quantidade = lancamento.quantidade;
+    novolancamento.estado = lancamento.estado;
+    novolancamento.descricao = lancamento.descricao;
+    novolancamento.dataLancamento = lancamento.dataLancamento;
+
+    const productId: any = novolancamento.produto.id;
     this.produtoService.buscarPeloCodigo(productId)
       .then((produto: Produto) => {
-        lancamento.produto = produto;
+        novolancamento.produto = produto;
+        this.lancamentos.push(novolancamento);
       })
-    this.lancamentos.push(lancamento);
+
   }
 
-  adicionar(lancamento: Lancamento): Promise<Lancamento> {
-    return this.http.post<Lancamento>(`${this.lancamentosUrl}/business`, lancamento)
+  valorTotal(): number {
+    let valorT: number = 0;
+    this.lancamentos.forEach(element => {
+      if(typeof element.quantidade === 'number' && typeof element.produto.preco === 'number'){
+        valorT += element.quantidade * element.produto.preco;
+      }
+    });
+    return valorT;
+  }
+
+  salvarBusiness(business: Business): Promise<Business> {
+    return this.http.post<Business>(`${this.lancamentosUrl}/business`, business)
       .toPromise();
   }
 
@@ -79,8 +97,6 @@ export class LancamentoService {
       params = params.set('estado', filtro.estado);
     }
 
-    //console.log(params);
-
     return this.http.get(`${this.lancamentosUrl}`, { params })
       .toPromise()
       .then((response: any) => {
@@ -93,10 +109,7 @@ export class LancamentoService {
       });
   }
 
-  getLancamentos() {
-    for(let i = 0; i < this.lancamentos.length; i++) {
-      console.log('array ' + this.lancamentos[i].produto.nome);
-    }
+  getLancamentos(): Lancamento[] {
     return this.lancamentos;
   }
 }

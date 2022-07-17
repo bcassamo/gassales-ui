@@ -1,12 +1,13 @@
 import { NgForm } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { LazyLoadEvent, MessageService } from 'primeng/api';
 
-import { Lancamento, Produto, Business } from './../../core/model';
+import { Lancamento, Produto, Business, Entidade } from './../../core/model';
 import { ProdutoService } from './../../produtos/produto.service';
-import { EntidadeService } from './../../entidades/entidade.service';
+import { EntidadeService, EntidadeFiltro } from './../../entidades/entidade.service';
 import { ErrorHandlerService } from './../../core/error-handler.service';
 import { LancamentoService, LancamentoFiltro } from './../../lancamentos/lancamento.service';
 
@@ -20,8 +21,8 @@ export class NovaVendaComponent implements OnInit {
   dataLancamento = new Date(Date.now());
   totalRegistos: number = 0;
   filtro = new LancamentoFiltro();
-  carrinhoProdutos: any[] = [];
-  cliente?: string;
+  carrinhoProdutos: Lancamento[] = [];
+  //cliente?: string;
 
   filteredClients: any[] = [];
   customers: any[] = [];
@@ -32,7 +33,8 @@ export class NovaVendaComponent implements OnInit {
   lancamento: Lancamento = new Lancamento();
   business: Business = new Business();
 
-  valorT = 15000;
+  valorT: number = 0;
+  trocos: number = 0;
 
   constructor(
     private entidadeService: EntidadeService,
@@ -40,6 +42,7 @@ export class NovaVendaComponent implements OnInit {
     private lancamentoService: LancamentoService,
     private errorHandler: ErrorHandlerService,
     private messageService: MessageService,
+    private router: Router,
     private title: Title
   ) {}
 
@@ -48,20 +51,20 @@ export class NovaVendaComponent implements OnInit {
     this.getAllCustomers();
     this.getAllProducts();
 
-    this.setVariaveis();
+    //this.setVariaveis();
   }
 
-  setVariaveis() {
-    if(!(this.cliente === null)) {
-      this.filteredClients[0] = this.cliente;
-    }
-  }
+  //setVariaveis() {
+    //if(!(this.cliente === null)) {
+      //this.filteredClients[0] = this.cliente;
+    //}
+  //}
 
-  salvar(novaVendaForm: NgForm) {
-    this.lancamento.descricao = "Venda"
-    this.lancamento.dataLancamento = this.dataLancamento;
+  //salvar(novaVendaForm: NgForm) {
+    //this.lancamento.descricao = "Venda"
+    //this.lancamento.dataLancamento = this.dataLancamento;
 
-    this.lancamentoService.adicionarLancamento(this.lancamento);
+    //this.lancamentoService.adicionarLancamento(this.lancamento);
       //.then(() => {
         //this.messageService.add({ severity: 'success', detail: 'Lançamento adicionado com sucesso!' });
 
@@ -69,17 +72,52 @@ export class NovaVendaComponent implements OnInit {
         //this.lancamento = new Lancamento();
       //})
       //.catch(erro => this.errorHandler.handle(erro));
-  }
+  //}
 
   adicionarAoCarrinho(novaVendaForm: NgForm) {
     this.lancamento.descricao = "Venda"
     this.lancamento.dataLancamento = this.dataLancamento;
+    const productId: any = this.lancamento.produto.id;
+    this.produtoService.buscarPeloCodigo(productId)
+      .then((produto: Produto) => {
+        if(typeof this.lancamento.quantidade === 'number' && typeof produto.preco === 'number'){
+          this.valorT = this.lancamentoService.valorTotal() + (this.lancamento.quantidade * produto.preco);
+        }
+      })
 
     this.lancamentoService.adicionarLancamento(this.lancamento);
-
   }
 
-  finalizar(){}
+  finalizar(finalizarNovaVendaForm: NgForm){
+    this.carrinhoProdutos.forEach(lancamento => {
+      this.lancamentoService.salvar(lancamento)
+      .then(lancamentoSalvo => {
+        this.business.codigoBusiness = lancamentoSalvo.codigoBusiness;
+        this.business.descricao = lancamentoSalvo.descricao;
+        this.business.dataBusiness = lancamentoSalvo.dataLancamento;
+      })
+      .catch(erro => this.errorHandler.handle(erro));
+    });
+
+    this.business.finalizado = true;
+    if(typeof this.business.entidade.id === 'number'){
+      this.entidadeService.buscarPeloCodigo(this.business.entidade.id)
+      .then(entidade => {
+        this.business.entidade = entidade;
+      })
+      .catch(erro => this.errorHandler.handle(erro));
+    }
+
+    this.lancamentoService.salvarBusiness(this.business)
+      .then(businessSalvo => {
+        this.messageService.add({ severity: 'success', detail: businessSalvo.descricao + ' efectuada com sucesso!' });
+
+        this.router.navigate(['/business/vendas', businessSalvo.id]);
+      })
+      .catch(erro => this.errorHandler.handle(erro));
+    console.log(this.carrinhoProdutos);
+    console.log(this.business);
+  }
 
   escondeEstado(event: any) {
     this.produtoService.buscarPeloCodigo(event.value).then((produto: Produto) => {
@@ -91,20 +129,24 @@ export class NovaVendaComponent implements OnInit {
     });
   }
 
-  pesquisar(pagina: number = 0) {
-    this.filtro.pagina = pagina;
-    this.filtro.dataLancamentoDe = new Date();
-    this.filtro.dataLancamentoAte = new Date();
-    this.lancamentoService.pesquisarLancamentos(this.filtro)
-      .then(resultado => {
-        this.totalRegistos = resultado.total;
-        //this.lancamentos = resultado.lancamentos;
-      })
-      .catch(erro => this.errorHandler.handle(erro));
+  calcularTrocos(event: any) {
+    this.trocos = (event.value) - this.valorT;
   }
 
+  //pesquisar(pagina: number = 0) {
+    //this.filtro.pagina = pagina;
+    //this.filtro.dataLancamentoDe = new Date();
+    //this.filtro.dataLancamentoAte = new Date();
+    //this.lancamentoService.pesquisarLancamentos(this.filtro)
+      //.then(resultado => {
+        //this.totalRegistos = resultado.total;
+        //this.carrinhoProdutos = resultado.lancamentos;
+      //})
+      //.catch(erro => this.errorHandler.handle(erro));
+  //}
+
   aoMudarPagina(event: LazyLoadEvent) {
-    //const pagina = event!.first! / event!.rows!;
+    const pagina = event!.first! / event!.rows!;
     //this.pesquisar(pagina);
     this.getAllLancamentos();
   }
@@ -112,7 +154,7 @@ export class NovaVendaComponent implements OnInit {
   getAllLancamentos() {
     //this.totalRegistos = this.lancamentoService.retornarLancamentos().total;
     this.carrinhoProdutos = this.lancamentoService.getLancamentos();
-    console.log('Carrinho ' + this.carrinhoProdutos);
+    //console.log('Carrinho ' + this.carrinhoProdutos);
   }
 
   getAllCustomers() {
@@ -138,7 +180,8 @@ export class NovaVendaComponent implements OnInit {
     for(let i = 0; i < this.customers.length; i++) {
       let customer = this.customers[i];
       if(customer.label.toLowerCase().includes(query.toLowerCase())) {
-        this.cliente = customer.label;
+        //this.cliente = customer.label;
+        this.business.entidade.id = customer.value;
         filtered.push(customer.label);
       }
     }

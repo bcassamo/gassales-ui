@@ -1,0 +1,54 @@
+<div class="container">
+
+  <div class="grid">
+    <div class="col-12">
+      <h1>Pesquisa de Aquisições</h1>
+    </div>
+
+    <div class="col-12 md:col-6 p-fluid">
+      <label>Fornecedor</label>
+      <input type="text" placeholder="Pesquise pelo fornecedor" pInputText name="fornecedor" ngModel/>
+    </div>
+
+    <div class="col-6 md:col-12">
+      <label style="display: block;">Data</label>
+      <p-calendar dateFormat="dd-mm-yy" [showIcon]="true"
+        name="aquisicaoInicio" [(ngModel)]="filtro.dataBusinessInicio"></p-calendar>
+      <label class="label" style="margin: 0 5px;">Até</label>
+      <p-calendar dateFormat="dd-mm-yy" [showIcon]="true"
+        name="aquisicaoFim" [(ngModel)]="filtro.dataBusinessFim"></p-calendar>
+    </div>
+
+    <div class="col-12" style="margin: 15px 0;">
+      <button pButton type="submit" label="Pesquisar"></button>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="col-12">
+      <p-table [value]="business" responsiveLayout="scroll" emptyMessage="Nenhuma venda"
+        [paginator]="true" [rows]="filtro.itensPorPagina" [lazy]="true"
+        [totalRecords]="totalRegistos" (onLazyLoad)="aoMudarPagina($event)">
+        <ng-template pTemplate="header">
+          <tr>
+              <th>Nome</th>
+              <th>NUIT</th>
+              <th>Data</th>
+              <th>Valor</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-busines>
+          <tr>
+              <td>{{busines.entidade?.nome}}</td>
+              <td>{{busines.entidade?.nuit}}</td>
+              <td>{{busines.dataBusiness | date:'dd-MM-y'}}</td>
+              <td>{{busines.lancamento?.valorTotal}}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+
+  <a pButton label="Nova Aquisição" routerLink="/business/aquisicoes/nova" style="margin: 15px 0;"></a>
+
+</div>

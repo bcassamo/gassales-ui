@@ -25,7 +25,7 @@
 
       <div class="col-12 md:col-2 p-fluid">
         <label style="display: block;">Quantidade</label>
-        <p-inputNumber [min]="0" [size]="6" name="quantidade" ngModel #quantidade="ngModel" [required]="true"
+        <p-inputNumber [min]="0" [size]="6" name="quantidade" #quantidade="ngModel" [required]="true"
         [(ngModel)]="lancamento.quantidade"></p-inputNumber>
 
         <app-message [control]="quantidade" error="required"
@@ -38,7 +38,7 @@
     </div>
   </form>
 
-  <form autocomplete="off" (ngSubmit)="finalizar()">
+  <form #finalizarNovaVendaForm="ngForm" autocomplete="off" (ngSubmit)="finalizar(finalizarNovaVendaForm)">
     <div class="grid">
       <div class="col-12">
         <p-table [value]="carrinhoProdutos" [paginator]="true"
@@ -74,6 +74,8 @@
         <p-autoComplete [(ngModel)]="business.entidade.nome" [suggestions]="filteredClients"  (completeMethod)="search($event)"
           name="cliente" #cliente="ngModel" [required]="true"></p-autoComplete>
 
+        <input type="text" pInputText [(ngModel)]="business.entidade.id" #cliente="ngModel" name="entityid" [hidden]="true"/>
+
         <app-message [control]="cliente" error="required"
           text="Preencha o nome do cliente"></app-message>
       </div>
@@ -85,7 +87,8 @@
 
       <div class="col-12" style="margin: 10px; text-align: right;">
         <label style="font-weight: normal;">Valor Pago: </label>
-        <p-inputNumber mode="currency" currency="MZN" locale="pt-MZ" [min]="0" name="valor" ngModel #valor="ngModel" [required]="true"></p-inputNumber>
+        <p-inputNumber mode="currency" currency="MZN" locale="pt-MZ" [min]="0" name="valor"
+          ngModel #valor="ngModel" [required]="true" (onInput)="calcularTrocos($event)"></p-inputNumber>
 
         <app-message [control]="valor" error="required"
           text="Preencha o valor Pago"></app-message>
@@ -93,11 +96,11 @@
 
       <div class="col-12" style="margin: 10px; text-align: right;">
         <label style="font-weight: normal;">Trocos: </label>
-        <label>{{ valorT | currency: 'MZN':'' }} MTn</label>
+        <label>{{ trocos | currency: 'MZN':'' }} MTn</label>
       </div>
 
       <div class="col-12">
-        <button pButton type="submit" label="Finalizar Venda" style="margin: 25px 25px 0 0" [disabled]="novaVendaForm.invalid"></button>
+        <button pButton type="submit" label="Finalizar Venda" style="margin: 25px 25px 0 0" [disabled]="finalizarNovaVendaForm.invalid"></button>
 
         <a routerLink="/business/vendas">Voltar para a pesquisa</a>
       </div>

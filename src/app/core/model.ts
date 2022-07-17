@@ -56,3 +56,14 @@ export class Business {
   finalizado?: boolean;
   //lancamento = new Lancamento();
 }
+
+// classe de teste
+export class Venda {
+  id?: number;
+  codigoBusiness?: string;
+  entidade = new Entidade();
+  produto = new Produto();
+  estado = 'NA';
+  quantidade?: number;
+  dataVenda?: Date;
+}
