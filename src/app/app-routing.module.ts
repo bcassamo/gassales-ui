@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { BusinessRoutingModule } from './business/business-routing.module';
 import { ProdutosRoutingModule } from './produtos/produtos-routing.module';
 import { EntidadesRoutingModule } from './entidades/entidades-routing.module';
+import { TransaccaoRoutingModule } from './transaccao/transaccao-routing.module';
 import { PaginaNaoEncontradaComponent } from './core/pagina-nao-encontrada.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'business/vendas', pathMatch: 'full' },
+  { path: '', redirectTo: 'transaccao/vendas', pathMatch: 'full' },
 
   { path: 'pagina-nao-encontrada', component: PaginaNaoEncontradaComponent },
   { path: '**', redirectTo: 'pagina-nao-encontrada' }
@@ -18,7 +18,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
 
     // importando enquanto angular não resolver o bug
-    BusinessRoutingModule,
+    TransaccaoRoutingModule,
     ProdutosRoutingModule,
     EntidadesRoutingModule
   ],

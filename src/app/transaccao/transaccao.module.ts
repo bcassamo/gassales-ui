@@ -13,9 +13,10 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 
 import { SharedModule } from './../shared/shared.module';
-import { BusinessRoutingModule } from './business-routing.module';
+import { TransaccaoRoutingModule } from './transaccao-routing.module';
 import { NovaVendaComponent } from './nova-venda/nova-venda.component';
 import { PesquisaVendaComponent } from './pesquisa-venda/pesquisa-venda.component';
+
 
 @NgModule({
   declarations: [
@@ -37,11 +38,11 @@ import { PesquisaVendaComponent } from './pesquisa-venda/pesquisa-venda.componen
     AutoCompleteModule,
 
     SharedModule,
-    BusinessRoutingModule
+    TransaccaoRoutingModule
   ],
   exports: [
     NovaVendaComponent,
     PesquisaVendaComponent
   ]
 })
-export class BusinessModule { }
+export class TransaccaoModule { }
