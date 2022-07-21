@@ -67,13 +67,11 @@ export class NovaVendaComponent implements OnInit {
       if(typeof transaccao.quantidade === 'number' && typeof transaccao.produto.preco === 'number'){
         transaccao.valorTotal = transaccao.quantidade * transaccao.produto.preco;
       }
-      //console.log(transaccao);
       this.transaccaoService.salvar(transaccao)
         .then(() => {
           //Eliminar o metodo limparCarrinho
           //ver como reiniciar a tabela com dados carregados ngOnInit()
 
-          //this.carrinhoProdutos = this.transaccaoService.limparCarrinho();
           //finalizarNovaVendaForm.reset();
           //console.log(this.carrinhoProdutos);
         })

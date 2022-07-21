@@ -10,8 +10,6 @@ import { ProdutosModule } from './produtos/produtos.module';
 import { EntidadesModule } from './entidades/entidades.module';
 import { TransaccaoModule } from './transaccao/transaccao.module';
 
-import { BusinessModule } from './business/business.module';
-
 @NgModule({
   declarations: [
     AppComponent
@@ -24,9 +22,7 @@ import { BusinessModule } from './business/business.module';
     CoreModule,
     ProdutosModule,
     EntidadesModule,
-    TransaccaoModule,
-
-    BusinessModule
+    TransaccaoModule
   ],
   providers: [],
   bootstrap: [AppComponent]

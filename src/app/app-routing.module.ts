@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { BusinessRoutingModule } from './business/business-routing.module';
 import { ProdutosRoutingModule } from './produtos/produtos-routing.module';
 import { EntidadesRoutingModule } from './entidades/entidades-routing.module';
 import { TransaccaoRoutingModule } from './transaccao/transaccao-routing.module';
@@ -19,7 +18,6 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
 
     // importando enquanto angular não resolver o bug
-    BusinessRoutingModule,
     TransaccaoRoutingModule,
     ProdutosRoutingModule,
     EntidadesRoutingModule

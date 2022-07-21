@@ -55,12 +55,6 @@ export class TransaccaoService {
       })
   }
 
-  limparCarrinho(): Transaccao[] {
-    let carrinhoLimpo: Transaccao[] = [];
-    carrinhoLimpo = this.carrinhoCompras.splice(0, this.carrinhoCompras.length);
-    return carrinhoLimpo;
-  }
-
   listarTodasTransaccoes() : Promise<any> {
     return this.http.get(this.transaccaoUrl)
       .toPromise()

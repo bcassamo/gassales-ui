@@ -31,30 +31,6 @@ export class Produto {
   tamanho?: number;
   preco?: number;
   tipoProduto = new TipoProduto()
-  //stock = new Stock();
-}
-
-export class Lancamento {
-  id?: number;
-  codigoBusiness?:string;
-  descricao?:string;
-  dataLancamento?: Date;
-  estado = 'NA';
-  //preco?: number;
-  quantidade?: number;
-  valorTotal?: number;
-  produto = new Produto();
-  //entidade = new Entidade();
-}
-
-export class Business {
-  id?: number;
-  codigoBusiness?: string;
-  descricao?:string;
-  dataBusiness?: Date;
-  entidade = new Entidade();
-  finalizado?: boolean;
-  //lancamento = new Lancamento();
 }
 
 export class Transaccao {
@@ -67,15 +43,4 @@ export class Transaccao {
   estado = 'NA';
   quantidade?: number;
   valorTotal?: number;
-}
-
-// classe de teste
-export class Venda {
-  id?: number;
-  codigoBusiness?: string;
-  entidade = new Entidade();
-  produto = new Produto();
-  estado = 'NA';
-  quantidade?: number;
-  dataVenda?: Date;
 }
