@@ -1,0 +1,60 @@
+<div class="container">
+
+  <form autocomplete="off" (ngSubmit)="pesquisar()">
+    <div class="grid">
+      <div class="col-12">
+        <h1>Pesquisa de Vendas</h1>
+      </div>
+
+      <div class="col-12 md:col-6 p-fluid">
+        <label>Cliente</label>
+        <input type="text" placeholder="Pesquise pelo cliente" pInputText name="cliente" ngModel/>
+      </div>
+
+      <div class="col-6 md:col-12">
+        <label style="display: block;">Data</label>
+        <p-calendar dateFormat="dd-mm-yy" [showIcon]="true"
+          name="vendaInicio" [(ngModel)]="filtro.dataTransaccaoDe"></p-calendar>
+        <label class="label" style="margin: 0 5px;">Até</label>
+        <p-calendar dateFormat="dd-mm-yy" [showIcon]="true"
+          name="vendaFim" [(ngModel)]="filtro.dataTransaccaoAte"></p-calendar>
+      </div>
+
+      <div class="col-12" style="margin: 15px 0;">
+        <button pButton type="submit" label="Pesquisar"></button>
+      </div>
+    </div>
+  </form>
+
+  <div class="grid">
+    <div class="col-12">
+      <p-table [value]="transaccoes" responsiveLayout="scroll" emptyMessage="Nenhuma venda"
+        [paginator]="true" [rows]="filtro.itensPorPagina" [lazy]="true"
+        [totalRecords]="totalRegistos" (onLazyLoad)="aoMudarPagina($event)">
+        <ng-template pTemplate="header">
+          <tr>
+              <th>Nome</th>
+              <th>Data</th>
+              <th>Produto</th>
+              <th>Qnt.</th>
+              <th>Preço</th>
+              <th>Valor</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-transaccao>
+          <tr>
+              <td>{{transaccao.entidade?.nome}}</td>
+              <td>{{transaccao.dataTransaccao | date:'dd-MM-y'}}</td>
+              <td>{{transaccao.produto?.nome}}</td>
+              <td>{{transaccao.quantidade}}</td>
+              <td>{{transaccao.produto?.preco}}</td>
+              <td>{{transaccao.valorTotal}}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+
+  <a pButton label="Nova Venda" routerLink="/transaccao/vendas/nova" style="margin: 15px 0;"></a>
+
+</div>

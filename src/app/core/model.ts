@@ -57,6 +57,18 @@ export class Business {
   //lancamento = new Lancamento();
 }
 
+export class Transaccao {
+  id?: number;
+  idTransaccao?: string;
+  tipo?: string;
+  dataTransaccao?: Date;
+  entidade = new Entidade();
+  produto = new Produto();
+  estado = 'NA';
+  quantidade?: number;
+  valorTotal?: number;
+}
+
 // classe de teste
 export class Venda {
   id?: number;

@@ -1,0 +1,109 @@
+<div class="container">
+
+  <form #novaVendaForm="ngForm" autocomplete="off" (ngSubmit)="adicionarAoCarrinho(novaVendaForm)">
+    <div class="grid">
+      <div class="col-12">
+        <h1>Nova Venda</h1>
+      </div>
+
+      <div class="col-12 md:col-6 p-fluid">
+        <label style="display: block;">Produto</label>
+        <p-dropdown [options]="produtos" [filter]="true" placeholder="Pesquise pelo produto"
+            emptyFilterMessage="Nenhum produto encontrado" name="produto" #produto [required]="true"
+            (onChange)="escondeEstado($event)" [(ngModel)]="transaccao.produto.id"></p-dropdown>
+      </div>
+
+      <div class="col-12 md:col-6 p-fluid">
+        <!-- div vazia para permitir ajustar a quebra de linha para o Estado,
+          Quantidade e botao adicionar -->
+      </div>
+
+      <div class="col-12 md:col-2 p-fluid" [hidden]="esconderEstado">
+        <label style="display: block;">Estado</label>
+        <p-dropdown [options]="estados" placeholder="Seleccione o estado"
+          name="estado" ngModel #estado [required]="true" [(ngModel)]="transaccao.estado"></p-dropdown>
+      </div>
+
+      <div class="col-12 md:col-2 p-fluid">
+        <label style="display: block;">Quantidade</label>
+        <p-inputNumber [min]="0" [size]="6" name="quantidade" #quantidade="ngModel" [required]="true"
+        [(ngModel)]="transaccao.quantidade"></p-inputNumber>
+
+        <app-message [control]="quantidade" error="required"
+          text="Preencha a quantidade para o produto seleccionado"></app-message>
+      </div>
+
+      <div class="col-12 md:col-2 p-fluid">
+        <button pButton type="submit" label="Adicionar" style="margin: 15px 0;" [disabled]="novaVendaForm.invalid"></button>
+      </div>
+    </div>
+  </form>
+
+  <form #finalizarNovaVendaForm="ngForm" autocomplete="off" (ngSubmit)="finalizar(finalizarNovaVendaForm)">
+    <div class="grid">
+      <div class="col-12">
+        <p-table [value]="carrinhoProdutos" [paginator]="true"
+          responsiveLayout="scroll" [rows]="filtro.itensPorPagina" [lazy]="true"
+          [totalRecords]="totalRegistos" (onLazyLoad)="aoMudarPagina($event)">
+          <ng-template pTemplate="header">
+            <tr>
+                <th>Produto</th>
+                <th>Quantidade</th>
+                <th>Preço</th>
+                <th>Valor</th>
+                <th class="col-accoes-header"></th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-carrinho>
+            <tr>
+                <td>{{carrinho.produto.nome}}</td>
+                <td>{{carrinho.quantidade}}</td>
+                <td>{{carrinho.produto.preco | currency: 'MZN':'' }}</td>
+                <td>{{carrinho.quantidade * carrinho.produto.preco | currency: 'MZN':'' }}</td>
+                <td class="col-accoes">
+                  <button pButton icon="pi pi-trash" pTooltip="Eliminar" tooltipPosition="top"></button>
+                </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="col-12 md:col-6 p-fluid">
+        <label style="display: block;">Cliente</label>
+        <p-autoComplete [(ngModel)]="transaccao.entidade.nome" [suggestions]="filteredCustomers"  (completeMethod)="searchForCustomers($event)"
+          name="cliente" #cliente="ngModel" [required]="true"></p-autoComplete>
+
+        <app-message [control]="cliente" error="required"
+          text="Preencha o nome do cliente"></app-message>
+      </div>
+
+      <div class="col-12" style="margin: 10px; text-align: right;">
+        <label style="font-weight: normal;">Valor Total: </label>
+        <label>{{ valorTotalCompra | currency: 'MZN':'' }} MTn</label>
+      </div>
+
+      <div class="col-12" style="margin: 10px; text-align: right;">
+        <label style="font-weight: normal;">Valor Pago: </label>
+        <p-inputNumber mode="currency" currency="MZN" locale="pt-MZ" [min]="0" name="valor"
+          ngModel #valor="ngModel" [required]="true" (onInput)="calcularTrocos($event)"></p-inputNumber>
+
+        <app-message [control]="valor" error="required"
+          text="Preencha o valor Pago"></app-message>
+      </div>
+
+      <div class="col-12" style="margin: 10px; text-align: right;">
+        <label style="font-weight: normal;">Trocos: </label>
+        <label>{{ trocosCompra | currency: 'MZN':'' }} MTn</label>
+      </div>
+
+      <div class="col-12">
+        <button pButton type="submit" label="Finalizar Venda" style="margin: 25px 25px 0 0" [disabled]="finalizarNovaVendaForm.invalid"></button>
+
+        <a routerLink="/transaccao/vendas">Voltar para a pesquisa</a>
+      </div>
+    </div>
+  </form>
+
+</div>

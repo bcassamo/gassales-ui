@@ -6,9 +6,11 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { CoreModule } from './core/core.module';
-import { BusinessModule } from './business/business.module';
 import { ProdutosModule } from './produtos/produtos.module';
 import { EntidadesModule } from './entidades/entidades.module';
+import { TransaccaoModule } from './transaccao/transaccao.module';
+
+import { BusinessModule } from './business/business.module';
 
 @NgModule({
   declarations: [
@@ -20,9 +22,11 @@ import { EntidadesModule } from './entidades/entidades.module';
     AppRoutingModule,
 
     CoreModule,
-    BusinessModule,
-    EntidadesModule,
     ProdutosModule,
+    EntidadesModule,
+    TransaccaoModule,
+
+    BusinessModule
   ],
   providers: [],
   bootstrap: [AppComponent]
