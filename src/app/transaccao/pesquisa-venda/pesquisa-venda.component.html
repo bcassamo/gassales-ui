@@ -39,6 +39,7 @@
               <th>Qnt.</th>
               <th>Preço</th>
               <th>Valor</th>
+              <th></th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-transaccao>
@@ -49,6 +50,10 @@
               <td>{{transaccao.quantidade}}</td>
               <td>{{transaccao.produto?.preco}}</td>
               <td>{{transaccao.valorTotal}}</td>
+              <td class="col-accoes">
+                <button pButton icon="pi pi-folder-open" pTooltip="Detalhes" tooltipPosition="top"
+                  [routerLink]="['/transaccao', transaccao.id]"></button>
+              </td>
           </tr>
         </ng-template>
       </p-table>

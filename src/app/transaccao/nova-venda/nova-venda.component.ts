@@ -72,6 +72,8 @@ export class NovaVendaComponent implements OnInit {
           //Eliminar o metodo limparCarrinho
           //ver como reiniciar a tabela com dados carregados ngOnInit()
 
+          // criar edicao de transaccao
+
           //finalizarNovaVendaForm.reset();
           //console.log(this.carrinhoProdutos);
         })
@@ -79,7 +81,7 @@ export class NovaVendaComponent implements OnInit {
     });
 
     this.messageService.add({severity: 'success', detail: this.transaccao.tipo + ' adicionada com sucesso!'});
-    this.router.navigate(['/transaccao/vendas']);
+    this.router.navigate(['/transaccao/vendas',]);
   }
 
   escondeEstado(event: any) {
